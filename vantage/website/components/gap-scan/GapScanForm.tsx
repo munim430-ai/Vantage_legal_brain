@@ -221,7 +221,12 @@ export default function GapScanForm() {
             {storageNotice.message}
           </div>
         )}
-        <RiskResultCard result={result} factoryName={form.factory_name} />
+        <RiskResultCard
+          result={result}
+          factoryName={form.factory_name}
+          contactName={form.contact_name}
+          contactWhatsApp={form.whatsapp_number}
+        />
       </div>
     );
   }

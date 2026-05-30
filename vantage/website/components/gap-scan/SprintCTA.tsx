@@ -44,7 +44,7 @@ export default function SprintCTA({ riskBand, complianceScore }: SprintCTAProps)
           rel="noopener noreferrer"
           className="border border-vantage-black-10 text-vantage-dark-grey px-6 py-3 rounded text-center hover:border-vantage-teal hover:text-vantage-teal transition-colors"
         >
-          Talk to VANTAGE on WhatsApp first
+          Book Sprint on WhatsApp
         </a>
       </div>
     );
@@ -65,7 +65,7 @@ export default function SprintCTA({ riskBand, complianceScore }: SprintCTAProps)
           rel="noopener noreferrer"
           className="border border-vantage-black-10 text-vantage-dark-grey px-6 py-3 rounded text-center hover:border-vantage-teal hover:text-vantage-teal transition-colors"
         >
-          WhatsApp VANTAGE to discuss your gaps
+          Book Sprint on WhatsApp
         </a>
       </div>
     );
@@ -86,7 +86,7 @@ export default function SprintCTA({ riskBand, complianceScore }: SprintCTAProps)
         rel="noopener noreferrer"
         className="border border-vantage-black-50 text-vantage-black-10 px-6 py-3 rounded text-center hover:border-white hover:text-white transition-colors"
       >
-        WhatsApp VANTAGE now
+        Book Sprint on WhatsApp
       </a>
     </div>
   );
