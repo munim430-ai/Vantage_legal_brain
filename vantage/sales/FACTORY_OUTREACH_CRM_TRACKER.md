@@ -381,7 +381,7 @@ All formulas reference the `factories`, `outreach_log`, `gap_scan_pipeline`, and
 
 **Total contacted (outreach sent at least once):**
 ```
-=COUNTIF(factories!P2:P,"<>New")
+=COUNTA(FILTER(factories!P2:P, factories!P2:P<>"", factories!P2:P<>"New"))
 ```
 
 **Total replies received:**
@@ -594,7 +594,7 @@ Review:
 
 ### Kill Criteria 1 — Rewrite Opener
 
-> **Trigger:** Batch 1 (first 100 factories contacted) produces fewer than 5 gap scan form completions.
+> **Trigger:** First 100 factories contacted (Batch 1 + first 50 factories of Batch 2) produce fewer than 5 gap scan form completions.
 
 **Action:**
 1. Pause all outreach.
