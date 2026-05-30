@@ -1,10 +1,13 @@
 import type { ScoringResult } from "@/lib/gap-scan/schema";
 import LegalDisclaimer from "@/components/layout/LegalDisclaimer";
 import SprintCTA from "./SprintCTA";
+import { whatsappLink } from "@/lib/brand/tokens";
 
 interface RiskResultCardProps {
   result: ScoringResult;
   factoryName: string;
+  contactName: string;
+  contactWhatsApp: string;
 }
 
 const BAND_CONFIG = {
@@ -38,9 +41,30 @@ const BAND_CONFIG = {
   },
 } as const;
 
-export default function RiskResultCard({ result, factoryName }: RiskResultCardProps) {
+function buildResultMessage(
+  factoryName: string,
+  contactName: string,
+  contactWhatsApp: string,
+  result: ScoringResult
+): string {
+  const topGapLines = result.topGaps
+    .slice(0, 5)
+    .map((g, i) => `${i + 1}. ${g.theme} (${g.riskLevel})`)
+    .join("\n");
+  return (
+    `Gap Scan Result — ${factoryName}\n\n` +
+    `Contact: ${contactName} | WA: ${contactWhatsApp}\n` +
+    `Score: ${result.complianceScore}/100 — ${result.riskBand}\n\n` +
+    `Top compliance gaps identified:\n${topGapLines}\n\n` +
+    `Recommended service: BLA 2026 Compliance Sprint\n\n` +
+    `Please contact me to discuss the next steps.`
+  );
+}
+
+export default function RiskResultCard({ result, factoryName, contactName, contactWhatsApp }: RiskResultCardProps) {
   const cfg = BAND_CONFIG[result.riskBand];
   const isLight = result.riskBand !== "Critical Risk";
+  const showResultCTA = result.riskBand !== "Low Risk";
 
   return (
     <div className={`rounded-lg overflow-hidden ${cfg.bg}`}>
@@ -116,7 +140,32 @@ export default function RiskResultCard({ result, factoryName }: RiskResultCardPr
         </p>
       </div>
 
-      {/* CTA */}
+      {/* WhatsApp result CTA — Medium, High, Critical only */}
+      {showResultCTA && (
+        <div className={`px-8 py-5 border-t ${isLight ? "border-vantage-black-10" : "border-vantage-black-70"}`}>
+          <p className={`text-xs mb-3 ${isLight ? "text-vantage-medium-grey" : "text-vantage-black-30"}`}>
+            Send your scan result to VANTAGE so we can prepare your follow-up.
+          </p>
+          <a
+            href={whatsappLink(buildResultMessage(factoryName, contactName, contactWhatsApp, result))}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`inline-flex items-center gap-2 font-semibold text-sm px-6 py-3 rounded transition-colors ${
+              isLight
+                ? "bg-vantage-teal text-white hover:bg-teal-700"
+                : "bg-vantage-gold text-vantage-black hover:bg-yellow-400"
+            }`}
+          >
+            Send this result to VANTAGE on WhatsApp →
+          </a>
+          <p className={`text-xs mt-2 ${isLight ? "text-vantage-medium-grey" : "text-vantage-black-30"}`}>
+            This opens a pre-filled WhatsApp message with your score, gaps, and recommended service.
+            No data is sent automatically — you review and send.
+          </p>
+        </div>
+      )}
+
+      {/* Sprint CTA */}
       <div className={`px-8 py-6 border-t ${isLight ? "border-vantage-black-10" : "border-vantage-black-70"}`}>
         <SprintCTA riskBand={result.riskBand} complianceScore={result.complianceScore} />
       </div>
