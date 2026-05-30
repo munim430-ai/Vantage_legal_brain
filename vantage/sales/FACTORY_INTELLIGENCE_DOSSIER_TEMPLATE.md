@@ -142,7 +142,7 @@ Review the signals recorded in Section 3 and select the primary outreach angle b
 | # | Condition from Section 3 | Outreach Angle | WhatsApp Template to Use |
 |---|---|---|---|
 | 1 | Visible buyer or export market signal | **Buyer-readiness angle** — "factories supplying [market/buyer] are seeing stricter documentation checks" | Template 5A |
-| 2 | RSC or Accord visibility | **Safety documentation readiness angle** — "RSC-listed factories are under increased documentation scrutiny" | Template 5B |
+| 2 | RSC or Accord visibility | **Safety documentation readiness angle** — "RSC-listed factories often maintain detailed safety and remediation documentation, and buyer-facing teams may need those records organized before reviews" | Template 5B |
 | 3 | Certification claimed on website but no audit framework listed | **Documentation consistency angle** — "certifications need documented records to hold up in buyer reviews" | Template 5C |
 | 4 | No compliance page on website, no audit framework listed | **Documentation visibility angle** — "buyers increasingly check documentation posture before visits" | Template 5D |
 | 5 | Strong website with active export promotion language | **Premium risk-control angle** — "factories at your level protect their buyer relationships with structured documentation review" | Template 5E |
@@ -240,7 +240,7 @@ Assalamualaikum [Name],
 
 I'm Munim from VANTAGE / Keystone Consultancy.
 
-For RSC-listed factories, documentation readiness is more closely scrutinised by buyers — particularly safety records and welfare policies under SMETA and Sedex frameworks.
+RSC-listed factories often maintain detailed safety and remediation documentation, and buyer-facing teams may need those records organized before reviews — particularly safety records and welfare policies under SMETA and Sedex frameworks.
 
 Our Free Gap Scan is a 25-question compliance review that shows where your documentation stands before a buyer review or audit preparation cycle.
 
@@ -525,7 +525,7 @@ Score this factory from 0 to 10 before deciding which batch to contact them in.
 | Signal | Finding |
 |---|---|
 | Visible buyers | 2 EU buyer contributors (Open Supply Hub) |
-| Export markets | EU (France, Germany — inferred from buyer origin) |
+| Export markets | EU signal visible through public buyer contributor data — not confirmed |
 | Product categories | Woven shirts |
 | Worker count estimate | 700–900 (Google Maps + LinkedIn post) |
 | Certifications claimed | None publicly stated |
@@ -536,7 +536,7 @@ Score this factory from 0 to 10 before deciding which batch to contact them in.
 | Sustainability / ESG language | No — only "quality assured" |
 
 **Internal notes (do not share):**
-Publicly visible signals suggest active EU buyer relationships without visible audit documentation. Expansion to 1,200 workers increases SMETA/Sedex exposure. Documentation gap likely. High priority contact.
+Publicly visible signals suggest active EU buyer relationships without visible audit documentation. Expansion to 1,200 workers increases SMETA/Sedex exposure. Documentation visibility is limited from public sources. High priority contact.
 
 **Section 5 — Outreach angle selected:** Angle 1 (buyer-facing) → Template 5A
 
@@ -590,13 +590,13 @@ When you complete a dossier, enter the data into `VANTAGE_Factory_Outreach_CRM` 
 | `address` | `address` |
 | `district` | `district_zone` |
 | `industrial_zone` | `district_zone` |
-| `product categories` | `products` |
-| `visible buyers` | `buyers` |
+| `product categories` | `main_products` |
+| `visible buyers` | `main_buyers` |
 | `audit frameworks` | `audit_frameworks` |
 | Worker count estimate | `worker_count_range` |
-| `priority_band` | maps to `tier` (A/B/C) |
+| `priority_band` | `tier`: score 8–10 → Tier 1; score 5–7 → Tier 1 or Tier 2 (based on contact quality); score 3–4 → Tier 2; score 0–2 → Tier 3 |
 | `CRM batch assignment` | `batch` |
-| `source_url` | `source` |
+| `source_url` | `internal_notes` (record the full URL here; `source` column = discovery type: Open Supply Hub / BGMEA directory / LinkedIn / Facebook / Referral / Cold / Other) |
 | `research_date` | `added_date` |
 | Upcoming audit signal | `upcoming_audit_known` (yes/no/unknown) |
 | Internal risk notes | `internal_notes` |
