@@ -127,7 +127,7 @@ Complete this checklist before confirming Sprint start date. Do not start Sprint
 
 ## Section 4 — Document Request List
 
-Send this request to the factory on Day 0 via WhatsApp. Group by category for clarity. Emphasize: documents are reviewed confidentially under the signed NDA and MSA; VANTAGE will not share them.
+Send this request to the factory on Day 0 via WhatsApp. Group by category for clarity. Emphasize: documents are reviewed confidentially under the signed MSA, and under a separate NDA if one is signed; VANTAGE will not share them.
 
 Do not demand any document the factory is unwilling to share. Record "not provided" and note it in the gap report.
 
@@ -360,14 +360,14 @@ Send a brief WhatsApp:
 |---|---|---|---|
 | **Gap Report** | 1-page compliance status summary — score, risk band, top gaps, missing evidence, recommended next step | PDF (editable DOCX on request, after balance payment) | Day 5 |
 | **Corrective Action Plan (CAP)** | Table of all gaps: theme, risk level, recommended action, responsible person, target date, evidence required | PDF + editable DOCX (after balance payment) | Day 5 |
-| **Policy/Document Drafts** | Up to 5 policy or register drafts/redrafts — BLA 2006 compliant, in Bangla and English | Editable DOCX (after balance payment) + PDF | Day 5 |
+| **Policy/Document Drafts** | Up to 5 policy or register drafts/redrafts — BLA 2006-aligned documentation support, in Bangla and English | Editable DOCX (after balance payment) + PDF | Day 5 |
 | **Evidence Checklist** | Factory-specific checklist of evidence required to close each CAP item | PDF | Day 5 |
 | **Review Call** | 60-minute call with HR Manager/Compliance Manager — walk through findings, explain CAP, confirm next steps | Live WhatsApp call or video call | Day 4 |
 | **Delivery Handover** | WhatsApp message confirming all files sent, how to use them, what to do next | WhatsApp | Day 5 |
 
 **Bangla summary:** All findings are delivered with a Bangla plain-language summary so factory HR staff can understand and act on them without translation.
 
-**English version:** All deliverables include English versions for buyer submission.
+**English version:** All deliverables include English versions that the factory may use for internal review or buyer-facing preparation at its own discretion.
 
 ---
 
