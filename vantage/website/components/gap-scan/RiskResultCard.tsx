@@ -16,7 +16,7 @@ const BAND_CONFIG = {
     scoreColor: "text-vantage-teal",
     badgeBg: "bg-vantage-teal",
     headline: "Your factory shows a low visible compliance risk.",
-    body: "The gaps identified are procedural. With targeted document improvement, your factory can reach a strong audit-preparation position. VANTAGE recommends a gap report review to confirm all records are complete and audit-ready.",
+    body: "The gaps identified are procedural. With targeted document improvement, your factory can reach a strong audit-preparation position. VANTAGE recommends a gap report review to confirm all records are complete and audit-preparation ready.",
   },
   "Medium Risk": {
     bg: "bg-vantage-light-grey",
