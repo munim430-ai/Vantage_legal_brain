@@ -51,6 +51,11 @@ export default function GapScanForm() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [result, setResult] = useState<ScoringResult | null>(null);
   const [liveScore, setLiveScore] = useState<ScoringResult | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [storageNotice, setStorageNotice] = useState<{
+    message: string;
+    variant: "success" | "info" | "warning";
+  } | null>(null);
 
   // Restore from localStorage
   useEffect(() => {
@@ -150,18 +155,72 @@ export default function GapScanForm() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const e = validateStep(4);
     if (Object.keys(e).length > 0) { setErrors(e); return; }
-    const scored = calculateScore(form);
-    setResult(scored);
+    setSubmitting(true);
+    setStorageNotice(null);
+
+    // Calculate locally — result screen is never blocked by API
+    const localScored = calculateScore(form);
+
+    try {
+      const res = await fetch("/api/gap-scan/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        setStorageNotice({
+          message: "Your score was generated, but the submission could not be stored. Please contact VANTAGE on WhatsApp.",
+          variant: "warning",
+        });
+      } else if (data.stored === true) {
+        setStorageNotice({
+          message: "Your scan was received. VANTAGE will follow up on WhatsApp.",
+          variant: "success",
+        });
+      } else if (data.success === true && data.stored === false) {
+        setStorageNotice({
+          message: "Your scan result is shown below. Lead storage is not connected yet.",
+          variant: "info",
+        });
+      } else {
+        setStorageNotice({
+          message: "Your score was generated, but the submission could not be stored. Please contact VANTAGE on WhatsApp.",
+          variant: "warning",
+        });
+      }
+    } catch {
+      setStorageNotice({
+        message: "Your score was generated, but the submission could not be stored. Please contact VANTAGE on WhatsApp.",
+        variant: "warning",
+      });
+    } finally {
+      setSubmitting(false);
+    }
+
+    setResult(localScored);
     localStorage.removeItem("vantage_gap_scan");
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   if (result) {
+    const noticeBorder =
+      storageNotice?.variant === "success"
+        ? "border-vantage-teal"
+        : storageNotice?.variant === "warning"
+        ? "border-vantage-gold"
+        : "border-vantage-black-10";
     return (
       <div className="max-w-2xl mx-auto px-4 py-10">
+        {storageNotice && (
+          <div className={`mb-6 border-l-4 ${noticeBorder} bg-vantage-light-grey px-4 py-3 rounded-r text-sm text-vantage-dark-grey`}>
+            {storageNotice.message}
+          </div>
+        )}
         <RiskResultCard result={result} factoryName={form.factory_name} />
       </div>
     );
@@ -491,9 +550,10 @@ export default function GapScanForm() {
           <button
             type="button"
             onClick={handleSubmit}
-            className="w-full bg-vantage-black text-white font-semibold py-4 rounded hover:bg-vantage-black-90 transition-colors text-lg"
+            disabled={submitting}
+            className="w-full bg-vantage-black text-white font-semibold py-4 rounded hover:bg-vantage-black-90 transition-colors text-lg disabled:opacity-60 disabled:cursor-not-allowed"
           >
-            Submit Gap Scan →
+            {submitting ? "Submitting…" : "Submit Gap Scan →"}
           </button>
         </div>
       )}
