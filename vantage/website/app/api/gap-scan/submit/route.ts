@@ -126,7 +126,9 @@ export async function POST(req: NextRequest) {
     riskBand,
     data.upcoming_audit,
     data.recent_failed_audit,
-    data.q25_doc1 ?? ""
+    data.q25_doc1 ?? "",
+    data.q25_doc2 ?? "",
+    data.q25_doc3 ?? ""
   );
   const offer = getRecommendedOffer(riskBand, sprintTriggered);
   const template = getWhatsAppTemplate(riskBand);

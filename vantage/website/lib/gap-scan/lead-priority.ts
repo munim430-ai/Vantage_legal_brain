@@ -2,13 +2,16 @@ export function getFollowUpPriority(
   riskBand: string,
   upcomingAudit: string,
   recentFailedAudit: string,
-  q25Doc1: string
+  q25Doc1: string,
+  q25Doc2: string = "",
+  q25Doc3: string = ""
 ): string {
+  // Recent failed audit forces same day regardless of risk band
+  if (recentFailedAudit === "yes") return "Same day";
   if (riskBand === "Critical Risk") return "Same day";
   if (riskBand === "High Risk") return "Same day";
-  // Recent failed audit upgrades medium to same day
-  if (riskBand === "Medium Risk" && recentFailedAudit === "yes") return "Same day";
-  if (riskBand === "Medium Risk" && (upcomingAudit === "yes" || q25Doc1.trim())) return "Within 24 hours";
+  const hasQ25Doc = q25Doc1.trim() || q25Doc2.trim() || q25Doc3.trim();
+  if (riskBand === "Medium Risk" && (upcomingAudit === "yes" || hasQ25Doc)) return "Within 24 hours";
   if (riskBand === "Medium Risk") return "Within 5 days";
   return "30-day re-contact";
 }
