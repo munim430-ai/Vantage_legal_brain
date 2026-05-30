@@ -1,5 +1,5 @@
 import type { ScoringResult } from "@/lib/gap-scan/schema";
-import LegalDisclaimer from "@/lib/gap-scan/..//../components/layout/LegalDisclaimer";
+import LegalDisclaimer from "@/components/layout/LegalDisclaimer";
 import SprintCTA from "./SprintCTA";
 
 interface RiskResultCardProps {
@@ -19,22 +19,22 @@ const BAND_CONFIG = {
     bg: "bg-vantage-light-grey",
     scoreColor: "text-vantage-gold",
     badgeBg: "bg-vantage-gold text-vantage-black",
-    headline: "Your factory has compliance gaps that will be raised in an audit.",
-    body: "The gaps identified are likely to produce nonconformity findings in a formal audit. A corrective action plan is needed before your next buyer review. VANTAGE can prepare a full gap report and corrective action plan through the BLA 2026 Compliance Sprint — delivered in 3 to 5 working days.",
+    headline: "Your factory has compliance gaps that may be raised during audit preparation.",
+    body: "The gaps identified may lead to CAP findings in a formal audit review. A corrective action plan is needed before your next buyer review. VANTAGE can prepare a full gap report and corrective action plan through the BLA 2026 Compliance Sprint — delivered in 3 to 5 working days.",
   },
   "High Risk": {
     bg: "bg-vantage-black-10",
     scoreColor: "text-vantage-black",
     badgeBg: "bg-vantage-black text-white",
     headline: "Your factory has significant compliance gaps across multiple areas.",
-    body: "These gaps create a risk of nonconformity findings and buyer compliance action. Without a corrective action plan, your next audit will produce a CAP. VANTAGE recommends starting a BLA 2026 Compliance Sprint as soon as possible.",
+    body: "These gaps create a risk of nonconformity findings and buyer compliance action. Without a corrective action plan, your next audit may produce CAP findings. VANTAGE recommends starting a BLA 2026 Compliance Sprint as soon as possible.",
   },
   "Critical Risk": {
     bg: "bg-vantage-black",
     scoreColor: "text-vantage-gold",
     badgeBg: "bg-vantage-gold text-vantage-black",
     headline: "Your factory has critical compliance gaps.",
-    body: "These gaps represent an immediate risk to your buyer relationships and audit standing. VANTAGE strongly recommends starting a BLA 2026 Compliance Sprint within the next 5 working days to reduce your exposure before any audit or buyer visit.",
+    body: "These gaps represent an immediate risk to your buyer relationships and audit-preparation posture. VANTAGE strongly recommends starting a BLA 2026 Compliance Sprint within the next 5 working days to reduce your exposure before any audit or buyer visit.",
   },
 } as const;
 

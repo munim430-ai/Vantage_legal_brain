@@ -24,8 +24,8 @@ const steps = [
   },
   {
     num: "3",
-    heading: "Audit-ready",
-    body: "Your factory enters the audit with clear documentation, closed gaps, and a corrective action plan that satisfies buyer requirements.",
+    heading: "Audit-preparation ready",
+    body: "Your factory enters the audit-preparation phase with clear documentation, closed gaps, and a corrective action plan that is structured for buyer and audit review.",
   },
 ];
 

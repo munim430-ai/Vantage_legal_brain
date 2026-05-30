@@ -168,6 +168,8 @@ export default function GapScanForm() {
   }
 
   const answeredCount = form.answers.filter((a) => a.answer !== null).length;
+  const q25Answered = form.q25_doc1.trim() !== "" || form.q25_doc2.trim() !== "" || form.q25_doc3.trim() !== "";
+  const totalAnswered = answeredCount + (q25Answered ? 1 : 0);
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8">
@@ -412,7 +414,7 @@ export default function GapScanForm() {
         <div>
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-bold text-vantage-black">Step 4 — Gap Scan Questions</h2>
-            <span className="text-sm text-vantage-medium-grey">{answeredCount} / 24 answered</span>
+            <span className="text-sm text-vantage-medium-grey">{totalAnswered} / 25 answered</span>
           </div>
 
           <p className="text-sm text-vantage-dark-grey mb-6">
@@ -469,7 +471,7 @@ export default function GapScanForm() {
           {liveScore && (
             <div className="bg-vantage-light-grey rounded p-5">
               <div className="text-sm text-vantage-dark-grey space-y-1">
-                <div>Questions answered: <strong>{answeredCount} of 24</strong></div>
+                <div>Questions answered: <strong>{totalAnswered} of 25</strong></div>
                 <div>Risk score: <strong>{liveScore.riskScore} / 141</strong></div>
                 <div>Compliance score: <strong>{liveScore.complianceScore} / 100</strong></div>
                 <div>Risk level: <strong>{liveScore.riskBand}</strong></div>

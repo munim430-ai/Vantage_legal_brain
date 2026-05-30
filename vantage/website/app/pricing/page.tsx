@@ -87,7 +87,7 @@ export default function PricingPage() {
             {/* Worker Voice */}
             <PricingCard
               title="Worker Voice"
-              tagline="Anonymous worker grievance intake — required by Sedex/SMETA 4-Pillar and Higg."
+              tagline="Anonymous worker grievance intake — supports worker voice and grievance-readiness expectations for frameworks such as Sedex/SMETA and Higg."
               price="BDT 15,000 / month"
               priceNote="One-time setup: BDT 10,000 (waived for Retainer clients)"
               deliverables={[
