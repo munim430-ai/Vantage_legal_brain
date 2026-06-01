@@ -1,0 +1,65 @@
+version: '3.9'
+
+# VANTAGE Factory Contact Intelligence — Docker Compose
+# Spins up: SearXNG, SpiderFoot, and Reacher (check-if-email-exists)
+# theHarvester and OpenRefine are run manually outside Docker.
+#
+# Usage:
+#   cd vantage/intelligence/factory-contact-intelligence
+#   docker compose -f docker/docker-compose.intelligence.yml up -d
+#
+# Then set in your .env:
+#   SEARXNG_BASE_URL=http://localhost:8080
+#   SPIDERFOOT_URL=http://localhost:5001
+#   REACHER_BASE_URL=http://localhost:8084
+
+services:
+  # ── SearXNG — private metasearch ──────────────────────────────────────────
+  searxng:
+    image: searxng/searxng:latest
+    container_name: vantage-searxng
+    ports:
+      - "8080:8080"
+    volumes:
+      - searxng_data:/etc/searxng
+    environment:
+      - SEARXNG_BASE_URL=http://localhost:8080
+    restart: unless-stopped
+    networks:
+      - vantage-intelligence
+
+  # ── SpiderFoot — OSINT enrichment ─────────────────────────────────────────
+  spiderfoot:
+    image: spiderfoot/spiderfoot:latest
+    container_name: vantage-spiderfoot
+    ports:
+      - "5001:5001"
+    volumes:
+      - spiderfoot_data:/var/lib/spiderfoot
+    restart: unless-stopped
+    networks:
+      - vantage-intelligence
+
+  # ── Reacher (check-if-email-exists) — email validation ────────────────────
+  # LICENSE NOTE: check-if-email-exists is AGPL-3.0 licensed.
+  # For internal business-only use (no external SaaS distribution), AGPL is acceptable.
+  # If you intend to offer this as a service to third parties, obtain a commercial license
+  # from Reacher at https://reacher.email — see LEGAL_AND_PLATFORM_RULES.md.
+  reacher:
+    image: reacherhq/backend:latest
+    container_name: vantage-reacher
+    ports:
+      - "8084:8080"
+    environment:
+      - RCH_HEADER_SECRET=${REACHER_API_KEY:-}
+    restart: unless-stopped
+    networks:
+      - vantage-intelligence
+
+volumes:
+  searxng_data:
+  spiderfoot_data:
+
+networks:
+  vantage-intelligence:
+    driver: bridge

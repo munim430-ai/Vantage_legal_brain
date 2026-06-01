@@ -1,0 +1,31 @@
+{
+  "name": "@vantage/factory-contact-intelligence",
+  "version": "1.0.0",
+  "description": "VANTAGE Factory Contact Intelligence — scrape, extract, cross-check, score, and export public RMG factory contact data for Bangladesh sales operations.",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc --project tsconfig.json",
+    "crawl:seed": "tsx scripts/run-seed-crawl.ts",
+    "crawl:factory": "tsx scripts/run-single-factory.ts",
+    "cross-check": "tsx scripts/run-cross-check.ts",
+    "clean": "tsx scripts/clean-output.ts",
+    "export": "tsx -e \"import('./src/exporters/exportCsv.js').then(m => m.exportAll())\""
+  },
+  "dependencies": {
+    "crawlee": "^3.10.0",
+    "libphonenumber-js": "^1.11.4",
+    "papaparse": "^5.4.1",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/papaparse": "^5.3.14",
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.0"
+  }
+}

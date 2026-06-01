@@ -1,0 +1,6 @@
+factory_id,factory_name,group_name,website,address,district,industrial_zone,bgmea_id,bkmea_id,source_seed,notes
+FAC-20260101-001,Tosrifa Industries Ltd,Tosrifa Group,https://www.tosrifa.com,"House 1 Road 3 Sector 7 Uttara",Dhaka,Uttara,BGMEA-1234,,bgmea_directory,Example seed — woven + knit
+FAC-20260101-002,Babylon Garments Ltd,Babylon Group,,"Vogra Joydebpur",Gazipur,Gazipur City,BGMEA-2345,,open_supply_hub,Known RSC contributor
+FAC-20260101-003,Square Fashions Ltd,Square Group,https://www.squarefashions.com,"Safipur Kaliakoir",Gazipur,Kaliakoir EPZ,,,buyer_supplier_list,H&M supplier — public list
+FAC-20260101-004,Envoy Textiles Ltd,Envoy Group,https://www.envoytextiles.com,"Mymensingh Road Bhaluka",Mymensingh,Bhaluka,,,bgmea_directory,Woven exports
+FAC-20260101-005,DBL Group,DBL Group,https://www.dblgroup.com,"Mouchak Kaliakoir Gazipur",,Kaliakoir,,BKMEA-5678,bkmea_directory,Large knitwear group
