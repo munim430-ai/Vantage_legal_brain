@@ -45,52 +45,43 @@ const problems = [
 
 type Severity = "Critical" | "High" | "Urgent";
 
-const severityConfig: Record<Severity, { tag: string; border: string }> = {
-  Critical: { tag: "text-vantage-black font-bold", border: "border-l-vantage-black" },
-  High: { tag: "text-vantage-teal font-bold", border: "border-l-vantage-teal" },
-  Urgent: { tag: "text-vantage-gold font-bold", border: "border-l-vantage-gold" },
-};
-
 export default function ProblemCards() {
   return (
-    <section className="bg-white py-16 md:py-24 overflow-x-hidden">
+    <section className="bg-white py-16 md:py-24 overflow-x-hidden border-t border-black">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="max-w-2xl mb-12">
-          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-vantage-dark-grey mb-4">
+          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-black mb-4">
             Risk Intelligence Grid
           </p>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-vantage-black tracking-tight leading-tight">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-black tracking-tight leading-tight">
             The gaps that trigger nonconformity findings — and what VANTAGE fixes first.
           </h2>
-          <p className="text-vantage-dark-grey mt-4 text-base leading-relaxed">
+          <p className="text-black mt-4 text-base leading-relaxed">
             BLA 2006 enforcement has intensified. Buyers now require documented evidence against
             specific sections — verbal assurances are not accepted.
           </p>
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-          {problems.map((p) => {
-            const cfg = severityConfig[p.severity];
-            return (
-              <div
-                key={p.title}
-                className={`bg-vantage-light-grey border-l-4 ${cfg.border} rounded-r-xl p-5`}
-              >
-                <div className="flex items-center justify-between mb-3">
-                  <span className={`text-[10px] uppercase tracking-widest ${cfg.tag}`}>
-                    {p.severity}
-                  </span>
-                  <span className="text-[10px] font-mono text-vantage-medium-grey">
-                    {p.ref}
-                  </span>
-                </div>
-                <h3 className="font-bold text-vantage-black mb-2 leading-snug text-sm">
-                  {p.title}
-                </h3>
-                <p className="text-sm text-vantage-dark-grey leading-relaxed">{p.detail}</p>
+          {problems.map((p) => (
+            <div
+              key={p.title}
+              className="border border-black rounded-xl p-5"
+            >
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-[10px] font-bold uppercase tracking-widest text-black">
+                  {p.severity}
+                </span>
+                <span className="text-[10px] font-mono text-black">
+                  {p.ref}
+                </span>
               </div>
-            );
-          })}
+              <h3 className="font-bold text-black mb-2 leading-snug text-sm">
+                {p.title}
+              </h3>
+              <p className="text-sm text-black leading-relaxed">{p.detail}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>

@@ -12,15 +12,15 @@ const FULL_DISCLAIMER =
 export default function LegalDisclaimer({ variant = "short", className = "" }: LegalDisclaimerProps) {
   return (
     <div
-      className={`border-l-4 border-vantage-teal bg-vantage-light-grey px-4 py-3 rounded-r ${className}`}
+      className={`border-l-2 border-black px-4 py-3 ${className}`}
       role="note"
       aria-label="Legal disclaimer"
     >
-      <p className="text-sm text-vantage-dark-grey leading-relaxed">
+      <p className="text-sm text-black leading-relaxed">
         {variant === "full" ? FULL_DISCLAIMER : SHORT_DISCLAIMER}
       </p>
       {variant === "full" && (
-        <p className="text-xs text-vantage-medium-grey mt-2">
+        <p className="text-xs text-black mt-2">
           VANTAGE is not affiliated with BSCI, WRAP, SA8000, Sedex, DIFE, or any buyer compliance programme.
         </p>
       )}

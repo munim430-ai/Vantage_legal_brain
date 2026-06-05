@@ -21,15 +21,15 @@ export default function DisclaimerPage() {
       <Header variant="dark" />
       <main className="flex-1">
         {/* Dark header band */}
-        <div className="bg-vantage-black text-white py-12 px-4 sm:px-6">
+        <div className="bg-black text-white py-12 px-4 sm:px-6">
           <div className="max-w-3xl mx-auto">
-            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-vantage-black-50 mb-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-white mb-4">
               Legal Document
             </p>
-            <h1 className="text-2xl md:text-3xl font-black tracking-tight leading-tight">
+            <h1 className="text-2xl md:text-3xl font-black tracking-tight leading-tight text-white">
               Legal Disclaimer and Service Boundary Statement
             </h1>
-            <p className="text-sm text-vantage-black-50 mt-3">
+            <p className="text-sm text-white mt-3">
               Keystone Consultancy trading as VANTAGE · Last updated: {today}
             </p>
           </div>
@@ -188,15 +188,15 @@ export default function DisclaimerPage() {
 
               <Section title="9. Contact">
                 <p>For questions about this disclaimer or our service boundaries:</p>
-                <address className="not-italic text-vantage-dark-grey space-y-1 mt-2">
-                  <div className="font-medium text-vantage-black">
+                <address className="not-italic text-black space-y-1 mt-2">
+                  <div className="font-medium text-black">
                     Keystone Consultancy trading as VANTAGE
                   </div>
                   <div>
                     WhatsApp:{" "}
                     <a
                       href="https://wa.me/8801941646278"
-                      className="text-vantage-teal underline hover:text-vantage-black transition-colors"
+                      className="underline hover:opacity-60 transition-opacity"
                     >
                       +8801941646278
                     </a>
@@ -205,7 +205,7 @@ export default function DisclaimerPage() {
                     Website:{" "}
                     <Link
                       href="/"
-                      className="text-vantage-teal underline hover:text-vantage-black transition-colors"
+                      className="underline hover:opacity-60 transition-opacity"
                     >
                       govantage.vercel.app
                     </Link>
@@ -224,10 +224,10 @@ export default function DisclaimerPage() {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section>
-      <h2 className="text-base font-bold text-vantage-black mb-3 pb-2 border-b border-vantage-black-10 tracking-tight">
+      <h2 className="text-base font-bold text-black mb-3 pb-2 border-b border-black tracking-tight">
         {title}
       </h2>
-      <div className="text-sm text-vantage-dark-grey space-y-3 leading-relaxed">
+      <div className="text-sm text-black space-y-3 leading-relaxed">
         {children}
       </div>
     </section>

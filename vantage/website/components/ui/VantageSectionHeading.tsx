@@ -13,7 +13,7 @@ interface VantageSectionHeadingProps {
 
 export default function VantageSectionHeading({
   eyebrow,
-  eyebrowVariant = "grey",
+  eyebrowVariant = "dark",
   title,
   subtitle,
   maxWidth = "max-w-2xl",
@@ -29,7 +29,7 @@ export default function VantageSectionHeading({
       )}
       <h2
         className={`text-2xl md:text-3xl lg:text-4xl font-black tracking-tight leading-tight ${
-          dark ? "text-white" : "text-vantage-black"
+          dark ? "text-white" : "text-black"
         }`}
       >
         {title}
@@ -37,7 +37,7 @@ export default function VantageSectionHeading({
       {subtitle && (
         <p
           className={`mt-4 text-base leading-relaxed ${
-            dark ? "text-vantage-black-10" : "text-vantage-dark-grey"
+            dark ? "text-white" : "text-black"
           }`}
         >
           {subtitle}

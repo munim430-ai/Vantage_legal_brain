@@ -3,10 +3,10 @@ import { type ReactNode } from "react";
 export type SectionVariant = "dark" | "light" | "grey" | "gold";
 
 const variantClass: Record<SectionVariant, string> = {
-  dark: "bg-vantage-black text-white",
-  light: "bg-white text-vantage-black",
-  grey: "bg-vantage-light-grey text-vantage-black",
-  gold: "bg-vantage-gold text-vantage-black",
+  dark: "bg-black text-white",
+  light: "bg-white text-black",
+  grey: "bg-white text-black",
+  gold: "bg-black text-white",
 };
 
 interface VantageSectionProps {

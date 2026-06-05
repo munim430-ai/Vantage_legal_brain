@@ -17,13 +17,13 @@ export default function SprintCTA({ riskBand, complianceScore }: SprintCTAProps)
       <div className="flex flex-col sm:flex-row gap-3">
         <Link
           href="/book?offer=gap-report"
-          className={`${btnBase} bg-vantage-teal text-white hover:opacity-90`}
+          className={`${btnBase} bg-black text-white hover:opacity-80`}
         >
           Request a Full Gap Report →
         </Link>
         <Link
           href="/pricing"
-          className={`${btnBase} border border-vantage-black-10 text-vantage-dark-grey hover:border-vantage-black hover:text-vantage-black`}
+          className={`${btnBase} border border-black text-black hover:bg-black hover:text-white`}
         >
           See all services
         </Link>
@@ -36,7 +36,7 @@ export default function SprintCTA({ riskBand, complianceScore }: SprintCTAProps)
       <div className="flex flex-col sm:flex-row gap-3">
         <Link
           href="/book?offer=sprint"
-          className={`${btnBase} bg-vantage-black text-white hover:bg-vantage-black-90`}
+          className={`${btnBase} bg-black text-white hover:opacity-80`}
         >
           Start the BLA 2026 Compliance Sprint — BDT 55,000 →
         </Link>
@@ -44,7 +44,7 @@ export default function SprintCTA({ riskBand, complianceScore }: SprintCTAProps)
           href={whatsappLink(waMessage)}
           target="_blank"
           rel="noopener noreferrer"
-          className={`${btnBase} border border-vantage-black-10 text-vantage-dark-grey hover:border-vantage-black hover:text-vantage-black`}
+          className={`${btnBase} border border-black text-black hover:bg-black hover:text-white`}
         >
           Book Sprint on WhatsApp
         </a>
@@ -57,7 +57,7 @@ export default function SprintCTA({ riskBand, complianceScore }: SprintCTAProps)
     <div className="flex flex-col sm:flex-row gap-3">
       <Link
         href="/book?offer=sprint&urgency=critical"
-        className={`${btnBase} bg-vantage-gold text-vantage-black hover:brightness-110`}
+        className={`${btnBase} bg-black text-white hover:opacity-80`}
       >
         Book Your Sprint Now — BDT 55,000 →
       </Link>
@@ -65,7 +65,7 @@ export default function SprintCTA({ riskBand, complianceScore }: SprintCTAProps)
         href={whatsappLink(waMessage)}
         target="_blank"
         rel="noopener noreferrer"
-        className={`${btnBase} border border-white/30 text-white hover:bg-white/10`}
+        className={`${btnBase} border border-black text-black hover:bg-black hover:text-white`}
       >
         Book Sprint on WhatsApp
       </a>

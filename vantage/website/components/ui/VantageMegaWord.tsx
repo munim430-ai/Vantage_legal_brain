@@ -1,11 +1,11 @@
 export type MegaWordVariant = "gold" | "black" | "white" | "teal" | "subtle";
 
 const variantClass: Record<MegaWordVariant, string> = {
-  gold: "text-vantage-gold",
-  black: "text-vantage-black",
+  gold: "text-white",
+  black: "text-black",
   white: "text-white",
-  teal: "text-vantage-teal",
-  subtle: "text-white/5",
+  teal: "text-white",
+  subtle: "text-black",
 };
 
 interface VantageMegaWordProps {
@@ -16,7 +16,7 @@ interface VantageMegaWordProps {
 
 export default function VantageMegaWord({
   word,
-  variant = "gold",
+  variant = "white",
   className = "",
 }: VantageMegaWordProps) {
   return (

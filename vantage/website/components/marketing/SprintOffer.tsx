@@ -33,13 +33,13 @@ export default function SprintOffer() {
   return (
     <>
       {/* Service tiers */}
-      <section className="bg-vantage-light-grey py-16 md:py-20 overflow-x-hidden">
+      <section className="bg-black text-white py-16 md:py-20 overflow-x-hidden">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="max-w-xl mb-10">
-            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-vantage-dark-grey mb-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-white mb-4">
               Service Stack
             </p>
-            <h2 className="text-2xl md:text-3xl font-black text-vantage-black tracking-tight leading-tight">
+            <h2 className="text-2xl md:text-3xl font-black text-white tracking-tight leading-tight">
               Three ways to work with VANTAGE
             </h2>
           </div>
@@ -65,59 +65,59 @@ export default function SprintOffer() {
       </section>
 
       {/* Sprint detail */}
-      <section className="bg-white py-16 md:py-24 overflow-x-hidden">
+      <section className="bg-white py-16 md:py-24 overflow-x-hidden border-t border-black">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="grid md:grid-cols-2 gap-14 items-start">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-vantage-dark-grey mb-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-black mb-4">
                 Sprint Product Sheet
               </p>
-              <h2 className="text-2xl md:text-3xl font-black text-vantage-black tracking-tight leading-tight mb-3">
+              <h2 className="text-2xl md:text-3xl font-black text-black tracking-tight leading-tight mb-3">
                 BLA 2026 Compliance Sprint
               </h2>
-              <p className="text-vantage-dark-grey mb-8 text-base">
+              <p className="text-black mb-8 text-base">
                 From gap scan to corrective action plan — in 3 to 5 working days.
               </p>
               <ul className="space-y-3">
                 {deliverables.map((d) => (
                   <li key={d} className="flex items-start gap-3">
-                    <span className="text-vantage-teal mt-0.5 shrink-0 font-bold text-sm">
+                    <span className="text-black mt-0.5 shrink-0 font-bold text-sm">
                       ✓
                     </span>
-                    <span className="text-vantage-dark-grey text-sm leading-relaxed">{d}</span>
+                    <span className="text-black text-sm leading-relaxed">{d}</span>
                   </li>
                 ))}
               </ul>
             </div>
 
-            {/* Terminal pricing card */}
-            <div className="bg-vantage-black text-white rounded-2xl p-8 flex flex-col gap-6">
+            {/* Pricing card */}
+            <div className="bg-black text-white rounded-2xl p-8 flex flex-col gap-6">
               <div>
-                <p className="text-[10px] font-semibold uppercase tracking-widest text-vantage-black-50 mb-3">
+                <p className="text-[10px] font-semibold uppercase tracking-widest text-white mb-3">
                   Sprint Investment
                 </p>
-                <div className="text-vantage-gold text-5xl font-black tracking-tight">
+                <div className="text-white text-5xl font-black tracking-tight">
                   BDT 55,000
                 </div>
-                <div className="text-vantage-black-30 text-sm mt-2">
+                <div className="text-white text-sm mt-2">
                   All inclusive · No hidden fees
                 </div>
               </div>
-              <div className="space-y-1.5 text-sm text-vantage-black-30 font-mono">
+              <div className="space-y-1.5 text-sm text-white font-mono">
                 <div>→ 50% before Sprint start</div>
                 <div>→ 50% on delivery</div>
                 <div>→ No travel charge within Dhaka / Gazipur</div>
               </div>
-              <div className="border-t border-vantage-black-70 pt-6 flex flex-col gap-3">
+              <div className="border-t border-white pt-6 flex flex-col gap-3">
                 <Link
                   href="/gap-scan"
-                  className="bg-vantage-gold text-vantage-black font-bold py-3.5 rounded-full text-center text-sm hover:brightness-110 transition-all"
+                  className="border border-white text-white font-bold py-3.5 rounded-full text-center text-sm hover:bg-white hover:text-black transition-all"
                 >
                   Start Free Gap Scan →
                 </Link>
                 <Link
                   href="/pricing"
-                  className="text-vantage-black-50 text-sm text-center hover:text-white transition-colors"
+                  className="text-white text-sm text-center hover:opacity-60 transition-opacity"
                 >
                   See full service stack →
                 </Link>
@@ -128,7 +128,7 @@ export default function SprintOffer() {
       </section>
 
       {/* How it works */}
-      <section className="bg-vantage-black py-16 md:py-24 overflow-x-hidden">
+      <section className="bg-black py-16 md:py-24 overflow-x-hidden">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <h2 className="text-2xl md:text-3xl font-black text-white tracking-tight mb-12">
             How VANTAGE works
@@ -136,14 +136,14 @@ export default function SprintOffer() {
           <div className="grid md:grid-cols-3 gap-8">
             {steps.map((s) => (
               <div key={s.num} className="flex flex-col gap-4">
-                <div className="text-5xl font-black text-vantage-black-70 leading-none tracking-tighter font-mono">
+                <div className="text-5xl font-black text-white leading-none tracking-tighter font-mono">
                   {s.num}
                 </div>
                 <div>
                   <h3 className="font-bold text-white mb-2 text-base leading-snug">
                     {s.heading}
                   </h3>
-                  <p className="text-sm text-vantage-black-10 leading-relaxed">{s.body}</p>
+                  <p className="text-sm text-white leading-relaxed">{s.body}</p>
                 </div>
               </div>
             ))}
@@ -168,28 +168,26 @@ function TierCard({
   return (
     <div
       className={`rounded-2xl p-6 flex flex-col gap-4 ${
-        featured ? "bg-vantage-black text-white" : "bg-white"
+        featured ? "bg-white text-black" : "border border-white text-white"
       }`}
     >
       <div
-        className={`inline-block text-xs font-bold px-3 py-1 rounded-full w-fit ${
-          featured
-            ? "bg-vantage-gold text-vantage-black"
-            : "bg-vantage-light-grey text-vantage-dark-grey"
+        className={`inline-block text-xs font-bold px-3 py-1 rounded-full w-fit border ${
+          featured ? "border-black text-black" : "border-white text-white"
         }`}
       >
         {badge}
       </div>
       <h3
         className={`font-bold text-base leading-snug ${
-          featured ? "text-white" : "text-vantage-black"
+          featured ? "text-black" : "text-white"
         }`}
       >
         {heading}
       </h3>
       <p
         className={`text-sm leading-relaxed ${
-          featured ? "text-vantage-black-10" : "text-vantage-dark-grey"
+          featured ? "text-black" : "text-white"
         }`}
       >
         {body}

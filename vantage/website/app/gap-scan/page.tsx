@@ -15,32 +15,19 @@ export default function GapScanPage() {
       <Header variant="dark" />
       <main className="flex-1 bg-white">
         {/* Dark command-style hero header */}
-        <div className="relative bg-vantage-black text-white py-16 md:py-20 overflow-hidden">
-          {/* Subtle mega word */}
-          <div
-            className="absolute bottom-[-0.06em] left-0 right-0 pointer-events-none select-none overflow-hidden"
-            aria-hidden="true"
-          >
-            <p
-              className="text-[18vw] md:text-[14vw] font-black tracking-[-0.08em] text-white/5 text-center whitespace-nowrap"
-              style={{ lineHeight: "0.82" }}
-            >
-              SCAN
-            </p>
-          </div>
-
-          <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6">
-            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-vantage-black-50 mb-4">
+        <div className="bg-black text-white py-16 md:py-20 overflow-hidden">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6">
+            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-white mb-4">
               VANTAGE · Factory Risk Intelligence
             </p>
             <h1 className="text-3xl md:text-5xl font-black text-white tracking-tight leading-tight mb-4">
               Free BLA 2026 Gap Scan
             </h1>
-            <p className="text-vantage-black-10 max-w-xl text-base leading-relaxed">
+            <p className="text-white max-w-xl text-base leading-relaxed">
               Answer 25 structured questions about your factory&apos;s compliance records. VANTAGE
               calculates your compliance score and identifies your top risk gaps — in real time.
             </p>
-            <p className="text-vantage-black-50 text-sm mt-3 font-mono">
+            <p className="text-white text-sm mt-3 font-mono">
               ≈ 15 to 30 minutes · No commitment
             </p>
           </div>

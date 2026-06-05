@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 
 export type HeaderVariant = "overlay" | "dark" | "light";
 
@@ -9,26 +8,26 @@ interface HeaderProps {
 
 const containerClass: Record<HeaderVariant, string> = {
   overlay: "absolute top-0 left-0 right-0 z-20 bg-transparent",
-  dark: "bg-vantage-black",
-  light: "bg-white border-b border-vantage-black-10",
+  dark: "bg-black",
+  light: "bg-white border-b border-black",
+};
+
+const wordmarkClass: Record<HeaderVariant, string> = {
+  overlay: "text-white",
+  dark: "text-white",
+  light: "text-black",
 };
 
 const navLinkClass: Record<HeaderVariant, string> = {
-  overlay: "text-vantage-black-10 hover:text-white",
-  dark: "text-vantage-black-10 hover:text-white",
-  light: "text-vantage-dark-grey hover:text-vantage-black",
+  overlay: "text-white hover:opacity-60",
+  dark: "text-white hover:opacity-60",
+  light: "text-black hover:opacity-60",
 };
 
 const ctaClass: Record<HeaderVariant, string> = {
-  overlay: "border-white/30 text-white hover:bg-white/10",
-  dark: "border-white/30 text-white hover:bg-white/10",
-  light: "border-vantage-black text-vantage-black hover:bg-vantage-light-grey",
-};
-
-const logoSrc: Record<HeaderVariant, string> = {
-  overlay: "/brand/White.jpeg",
-  dark: "/brand/White.jpeg",
-  light: "/brand/Black.jpeg",
+  overlay: "border border-white text-white hover:bg-white hover:text-black",
+  dark: "border border-white text-white hover:bg-white hover:text-black",
+  light: "border border-black text-black hover:bg-black hover:text-white",
 };
 
 const NAV = [
@@ -41,16 +40,11 @@ export default function Header({ variant = "dark" }: HeaderProps) {
   return (
     <header className={`w-full h-[72px] flex items-center ${containerClass[variant]}`}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full flex items-center justify-between">
-        {/* Logo */}
+        {/* Text wordmark */}
         <Link href="/" className="flex items-center shrink-0">
-          <Image
-            src={logoSrc[variant]}
-            alt="VANTAGE"
-            width={120}
-            height={40}
-            className="h-auto w-[96px] md:w-[120px] object-contain"
-            priority
-          />
+          <span className={`font-black tracking-[-0.08em] text-sm md:text-base transition-opacity ${wordmarkClass[variant]}`}>
+            VANTAGE
+          </span>
         </Link>
 
         {/* Center nav — desktop */}
@@ -59,7 +53,7 @@ export default function Header({ variant = "dark" }: HeaderProps) {
             <Link
               key={label}
               href={href}
-              className={`text-sm font-medium transition-colors ${navLinkClass[variant]}`}
+              className={`text-sm font-medium transition-opacity ${navLinkClass[variant]}`}
             >
               {label}
             </Link>
@@ -71,14 +65,14 @@ export default function Header({ variant = "dark" }: HeaderProps) {
           {/* Mobile shortcut */}
           <Link
             href="/gap-scan"
-            className={`md:hidden text-sm font-medium transition-colors ${navLinkClass[variant]}`}
+            className={`md:hidden text-sm font-medium transition-opacity ${navLinkClass[variant]}`}
           >
             Scan ↗
           </Link>
           {/* Desktop CTA pill */}
           <Link
             href="/gap-scan"
-            className={`hidden md:inline-flex items-center text-sm font-semibold px-4 py-2 rounded-full border transition-colors ${ctaClass[variant]}`}
+            className={`hidden md:inline-flex items-center text-sm font-semibold px-4 py-2 rounded-full border transition-all ${ctaClass[variant]}`}
           >
             Start scan ↗
           </Link>
