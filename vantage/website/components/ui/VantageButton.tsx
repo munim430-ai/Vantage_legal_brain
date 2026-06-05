@@ -5,11 +5,11 @@ export type ButtonVariant = "primary" | "dark" | "secondaryDark" | "secondaryLig
 export type ButtonSize = "sm" | "md" | "lg";
 
 const variantClass: Record<ButtonVariant, string> = {
-  primary: "bg-vantage-gold text-vantage-black hover:brightness-110",
-  dark: "bg-vantage-black text-white hover:bg-vantage-black-90",
-  secondaryDark: "border border-white/30 text-white hover:bg-white/10 hover:border-white/60",
-  secondaryLight: "border border-vantage-black text-vantage-black hover:bg-vantage-light-grey",
-  ghost: "text-vantage-black-30 hover:text-white",
+  primary: "bg-black text-white hover:opacity-80",
+  dark: "bg-black text-white hover:opacity-80",
+  secondaryDark: "border border-white text-white hover:bg-white hover:text-black",
+  secondaryLight: "border border-black text-black hover:bg-black hover:text-white",
+  ghost: "text-black underline hover:opacity-60",
 };
 
 const sizeClass: Record<ButtonSize, string> = {
@@ -73,7 +73,7 @@ export default function VantageButton({
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={`${cls} disabled:opacity-60 disabled:cursor-not-allowed`}
+      className={`${cls} disabled:opacity-40 disabled:cursor-not-allowed`}
     >
       {children}
     </button>

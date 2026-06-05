@@ -229,18 +229,10 @@ export default function GapScanForm() {
   };
 
   if (result) {
-    const noticeBorder =
-      storageNotice?.variant === "success"
-        ? "border-vantage-teal"
-        : storageNotice?.variant === "warning"
-        ? "border-vantage-gold"
-        : "border-vantage-black-10";
     return (
       <div className="max-w-2xl mx-auto px-4 py-10">
         {storageNotice && (
-          <div
-            className={`mb-6 border-l-4 ${noticeBorder} bg-vantage-light-grey px-4 py-3 rounded-r text-sm text-vantage-dark-grey`}
-          >
+          <div className="mb-6 border-l-4 border-black px-4 py-3 text-sm text-black">
             {storageNotice.message}
           </div>
         )}
@@ -271,10 +263,10 @@ export default function GapScanForm() {
       {step === 1 && (
         <div className="space-y-6">
           <LegalDisclaimer variant="full" className="mb-6" />
-          <h2 className="text-xl md:text-2xl font-black text-vantage-black tracking-tight">
+          <h2 className="text-xl md:text-2xl font-black text-black tracking-tight">
             Step 1 — Factory Details
           </h2>
-          <p className="text-sm text-vantage-dark-grey">
+          <p className="text-sm text-black">
             Tell us about your factory so we can apply the right compliance context to your results.
           </p>
 
@@ -367,10 +359,10 @@ export default function GapScanForm() {
                   key={fw}
                   type="button"
                   onClick={() => toggleFramework(fw)}
-                  className={`text-xs px-3 py-1.5 rounded border transition-colors ${
+                  className={`text-xs px-3 py-1.5 rounded border transition-all ${
                     form.audit_frameworks.includes(fw)
-                      ? "bg-vantage-black text-white border-vantage-black"
-                      : "bg-white text-vantage-dark-grey border-vantage-black-10 hover:border-vantage-teal"
+                      ? "bg-black text-white border-black"
+                      : "bg-white text-black border-black hover:bg-black hover:text-white"
                   }`}
                 >
                   {fw}
@@ -384,7 +376,7 @@ export default function GapScanForm() {
       {/* Step 2 — Your Details */}
       {step === 2 && (
         <div className="space-y-6">
-          <h2 className="text-xl md:text-2xl font-black text-vantage-black tracking-tight">
+          <h2 className="text-xl md:text-2xl font-black text-black tracking-tight">
             Step 2 — Your Details
           </h2>
 
@@ -453,9 +445,9 @@ export default function GapScanForm() {
                     value={v}
                     checked={form.decision_maker_present === v}
                     onChange={() => updateField("decision_maker_present", v)}
-                    className="accent-vantage-teal"
+                    className="accent-black"
                   />
-                  <span className="text-sm text-vantage-dark-grey capitalize">{v}</span>
+                  <span className="text-sm text-black capitalize">{v}</span>
                 </label>
               ))}
             </div>
@@ -466,10 +458,10 @@ export default function GapScanForm() {
       {/* Step 3 — Audit Urgency */}
       {step === 3 && (
         <div className="space-y-6">
-          <h2 className="text-xl md:text-2xl font-black text-vantage-black tracking-tight">
+          <h2 className="text-xl md:text-2xl font-black text-black tracking-tight">
             Step 3 — Audit Urgency
           </h2>
-          <p className="text-sm text-vantage-dark-grey">
+          <p className="text-sm text-black">
             This information helps us prioritise your gap scan results and recommend the right
             level of support.
           </p>
@@ -557,34 +549,34 @@ export default function GapScanForm() {
       {step === 4 && (
         <div>
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl md:text-2xl font-black text-vantage-black tracking-tight">
+            <h2 className="text-xl md:text-2xl font-black text-black tracking-tight">
               Step 4 — Gap Scan Questions
             </h2>
-            <span className="text-sm text-vantage-medium-grey font-mono">
+            <span className="text-sm text-black font-mono">
               {totalAnswered} / 25
             </span>
           </div>
 
-          <p className="text-sm text-vantage-dark-grey mb-6">
+          <p className="text-sm text-black mb-6">
             Answer each question based on your factory&apos;s current records and processes.
             &ldquo;Not sure&rdquo; is scored the same as &ldquo;No&rdquo; &mdash; the
             conservative approach.
           </p>
 
           {errors.questions && (
-            <div className="border-l-4 border-vantage-gold bg-vantage-light-grey px-4 py-3 rounded-r text-sm text-vantage-black mb-4">
+            <div className="border-l-4 border-black px-4 py-3 text-sm text-black mb-4">
               {errors.questions}
             </div>
           )}
 
           {/* Live score bar */}
           {liveScore && (
-            <div className="sticky top-0 z-10 bg-vantage-black text-white px-4 py-3 rounded mb-4 flex items-center justify-between text-sm font-mono">
+            <div className="sticky top-0 z-10 bg-black text-white px-4 py-3 rounded mb-4 flex items-center justify-between text-sm font-mono">
               <span>
                 Score: <strong>{liveScore.complianceScore}/100</strong>
               </span>
-              <span className="text-vantage-black-10">{liveScore.riskBand}</span>
-              <span className="text-vantage-gold">
+              <span className="text-white">{liveScore.riskBand}</span>
+              <span className="text-white">
                 ⬤ {liveScore.criticalCount} Critical
               </span>
             </div>
@@ -620,13 +612,13 @@ export default function GapScanForm() {
       {/* Step 5 — Review & Submit */}
       {step === 5 && (
         <div className="space-y-6">
-          <h2 className="text-xl md:text-2xl font-black text-vantage-black tracking-tight">
+          <h2 className="text-xl md:text-2xl font-black text-black tracking-tight">
             Step 5 — Review and Submit
           </h2>
 
           {liveScore && (
-            <div className="bg-vantage-light-grey rounded-xl p-5">
-              <div className="text-sm text-vantage-dark-grey space-y-1 font-mono">
+            <div className="border border-black rounded-xl p-5">
+              <div className="text-sm text-black space-y-1 font-mono">
                 <div>
                   Questions answered: <strong>{totalAnswered} of 25</strong>
                 </div>
@@ -643,7 +635,7 @@ export default function GapScanForm() {
             </div>
           )}
 
-          <div className="bg-vantage-light-grey rounded-xl p-5 text-sm text-vantage-dark-grey space-y-1">
+          <div className="border border-black rounded-xl p-5 text-sm text-black space-y-1">
             <div>
               <strong>Factory:</strong> {form.factory_name || "—"}
             </div>
@@ -665,7 +657,7 @@ export default function GapScanForm() {
             type="button"
             onClick={handleSubmit}
             disabled={submitting}
-            className="w-full bg-vantage-gold text-vantage-black font-bold py-4 rounded-full hover:brightness-110 transition-all text-base disabled:opacity-60 disabled:cursor-not-allowed"
+            className="w-full bg-black text-white font-bold py-4 rounded-full hover:opacity-80 transition-all text-base disabled:opacity-40 disabled:cursor-not-allowed"
           >
             {submitting ? "Submitting…" : "Submit Gap Scan →"}
           </button>
@@ -679,7 +671,7 @@ export default function GapScanForm() {
             <button
               type="button"
               onClick={handleBack}
-              className="border border-vantage-black-10 text-vantage-dark-grey px-6 py-3 rounded-full hover:border-vantage-black transition-colors text-sm"
+              className="border border-black text-black px-6 py-3 rounded-full hover:bg-black hover:text-white transition-all text-sm"
             >
               ← Back
             </button>
@@ -689,7 +681,7 @@ export default function GapScanForm() {
           <button
             type="button"
             onClick={handleContinue}
-            className="bg-vantage-black text-white font-bold px-8 py-3 rounded-full hover:bg-vantage-black-90 transition-colors text-sm"
+            className="bg-black text-white font-bold px-8 py-3 rounded-full hover:opacity-80 transition-all text-sm"
           >
             Continue →
           </button>
@@ -700,7 +692,7 @@ export default function GapScanForm() {
           <button
             type="button"
             onClick={handleBack}
-            className="border border-vantage-black-10 text-vantage-dark-grey px-6 py-3 rounded-full hover:border-vantage-black transition-colors text-sm"
+            className="border border-black text-black px-6 py-3 rounded-full hover:bg-black hover:text-white transition-all text-sm"
           >
             ← Back
           </button>
@@ -731,9 +723,9 @@ function RadioGroup({
             value={opt.value}
             checked={value === opt.value}
             onChange={() => onChange(opt.value)}
-            className="accent-vantage-teal w-4 h-4"
+            className="accent-black w-4 h-4"
           />
-          <span className="text-sm text-vantage-dark-grey">{opt.label}</span>
+          <span className="text-sm text-black">{opt.label}</span>
         </label>
       ))}
     </div>

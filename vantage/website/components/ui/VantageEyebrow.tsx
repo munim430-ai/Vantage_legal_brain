@@ -1,17 +1,17 @@
 export type EyebrowVariant = "gold" | "grey" | "dark" | "white";
 
 const textClass: Record<EyebrowVariant, string> = {
-  gold: "text-vantage-gold",
-  grey: "text-vantage-dark-grey",
-  dark: "text-vantage-black",
+  gold: "text-white",
+  grey: "text-black",
+  dark: "text-black",
   white: "text-white",
 };
 
 const borderClass: Record<EyebrowVariant, string> = {
-  gold: "border-vantage-gold/40",
-  grey: "border-vantage-black-10",
-  dark: "border-vantage-black",
-  white: "border-white/30",
+  gold: "border-white",
+  grey: "border-black",
+  dark: "border-black",
+  white: "border-white",
 };
 
 interface VantageEyebrowProps {
@@ -23,7 +23,7 @@ interface VantageEyebrowProps {
 
 export default function VantageEyebrow({
   children,
-  variant = "grey",
+  variant = "dark",
   pill = false,
   className = "",
 }: VantageEyebrowProps) {

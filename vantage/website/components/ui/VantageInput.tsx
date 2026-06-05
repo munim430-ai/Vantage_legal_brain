@@ -5,11 +5,9 @@ import {
 } from "react";
 
 const base =
-  "w-full text-sm border rounded px-3 py-2.5 focus:outline-none transition-colors";
-const normalState =
-  "bg-white text-vantage-black placeholder-vantage-medium-grey border-vantage-black-10 focus:border-vantage-gold";
-const errorState =
-  "bg-white text-vantage-black placeholder-vantage-medium-grey border-vantage-gold/80 focus:border-vantage-gold";
+  "w-full text-sm border rounded px-3 py-2.5 focus:outline-none transition-colors bg-white text-black";
+const normalState = "border-black focus:ring-1 focus:ring-black";
+const errorState = "border-2 border-black focus:ring-1 focus:ring-black";
 
 export function inputClass(hasError: boolean): string {
   return `${base} ${hasError ? errorState : normalState}`;

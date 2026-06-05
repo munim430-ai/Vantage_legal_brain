@@ -15,15 +15,15 @@ export default function PricingPage() {
       <Header variant="dark" />
       <main className="flex-1">
         {/* Hero header */}
-        <div className="bg-vantage-black text-white py-16 md:py-20 overflow-x-hidden">
+        <div className="bg-black text-white py-16 md:py-20 overflow-x-hidden">
           <div className="max-w-5xl mx-auto px-4 sm:px-6">
-            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-vantage-black-50 mb-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-white mb-4">
               VANTAGE Service Stack
             </p>
-            <h1 className="text-3xl md:text-5xl font-black tracking-tight leading-tight mb-4">
+            <h1 className="text-3xl md:text-5xl font-black tracking-tight leading-tight mb-4 text-white">
               Choose the level of factory-risk support you need.
             </h1>
-            <p className="text-vantage-black-10 text-base max-w-xl">
+            <p className="text-white text-base max-w-xl">
               All prices in BDT. No hidden fees. No unapproved charges.
               Payment by bKash Business, Nagad Business, or bank transfer.
             </p>
@@ -36,7 +36,7 @@ export default function PricingPage() {
             <div className="grid md:grid-cols-2 gap-5 mb-12">
               <ServiceCard
                 badge="FREE"
-                badgeStyle="bg-vantage-teal text-white"
+                badgeStyle="border border-black text-black"
                 title="Free BLA 2026 Gap Scan"
                 tagline="Identify your audit risk before you commit."
                 price="BDT 0"
@@ -55,7 +55,7 @@ export default function PricingPage() {
 
               <ServiceCard
                 badge="SPRINT"
-                badgeStyle="bg-vantage-gold text-vantage-black"
+                badgeStyle="border border-white text-white"
                 title="BLA 2026 Compliance Sprint"
                 tagline="From gap scan to corrective action plan — in 5 working days."
                 price="BDT 55,000"
@@ -128,13 +128,13 @@ export default function PricingPage() {
             </div>
 
             {/* Disclaimer */}
-            <div className="border-l-4 border-vantage-teal bg-vantage-light-grey px-5 py-4 rounded-r-xl">
-              <p className="text-sm text-vantage-dark-grey">
+            <div className="border-l-2 border-black px-5 py-4">
+              <p className="text-sm text-black">
                 All VANTAGE services provide compliance guidance and audit-preparation support.
                 VANTAGE does not provide legal advice and is not a law firm. No service package
                 guarantees an audit outcome. Audit results are determined solely by the relevant
                 audit body.{" "}
-                <Link href="/legal/disclaimer" className="underline hover:text-vantage-black">
+                <Link href="/legal/disclaimer" className="underline hover:opacity-60">
                   Full terms at /legal/disclaimer
                 </Link>
                 .
@@ -183,8 +183,8 @@ function ServiceCard({
     <div
       className={`rounded-2xl flex flex-col ${
         featured
-          ? "bg-vantage-black text-white border border-vantage-black-70"
-          : "border border-vantage-black-10 bg-white"
+          ? "bg-black text-white border border-white"
+          : "border border-black bg-white"
       } p-7`}
     >
       {badge && (
@@ -196,14 +196,14 @@ function ServiceCard({
       )}
       <h2
         className={`text-lg font-black tracking-tight mb-1 ${
-          featured ? "text-white" : "text-vantage-black"
+          featured ? "text-white" : "text-black"
         }`}
       >
         {title}
       </h2>
       <p
         className={`text-sm mb-5 leading-relaxed ${
-          featured ? "text-vantage-black-10" : "text-vantage-dark-grey"
+          featured ? "text-white" : "text-black"
         }`}
       >
         {tagline}
@@ -212,17 +212,13 @@ function ServiceCard({
       <div className="mb-5">
         <div
           className={`text-2xl font-black tracking-tight ${
-            featured ? "text-vantage-gold" : "text-vantage-black"
+            featured ? "text-white" : "text-black"
           }`}
         >
           {price}
         </div>
         {priceNote && (
-          <div
-            className={`text-xs mt-0.5 ${
-              featured ? "text-vantage-black-30" : "text-vantage-medium-grey"
-            }`}
-          >
+          <div className={`text-xs mt-0.5 ${featured ? "text-white" : "text-black"}`}>
             {priceNote}
           </div>
         )}
@@ -231,18 +227,10 @@ function ServiceCard({
       <ul className="space-y-2.5 flex-1 mb-5">
         {deliverables.map((d) => (
           <li key={d} className="flex items-start gap-2">
-            <span
-              className={`shrink-0 mt-0.5 font-bold text-sm ${
-                featured ? "text-vantage-gold" : "text-vantage-teal"
-              }`}
-            >
+            <span className={`shrink-0 mt-0.5 font-bold text-sm ${featured ? "text-white" : "text-black"}`}>
               ✓
             </span>
-            <span
-              className={`text-sm leading-relaxed ${
-                featured ? "text-vantage-black-10" : "text-vantage-dark-grey"
-              }`}
-            >
+            <span className={`text-sm leading-relaxed ${featured ? "text-white" : "text-black"}`}>
               {d}
             </span>
           </li>
@@ -250,29 +238,17 @@ function ServiceCard({
       </ul>
 
       {notIncluded && (
-        <p
-          className={`text-xs mb-4 ${
-            featured ? "text-vantage-black-50" : "text-vantage-medium-grey"
-          }`}
-        >
+        <p className={`text-xs mb-4 ${featured ? "text-white" : "text-black"}`}>
           <strong>Not included:</strong> {notIncluded}
         </p>
       )}
       {duration && (
-        <p
-          className={`text-xs mb-4 font-medium font-mono ${
-            featured ? "text-vantage-black-30" : "text-vantage-medium-grey"
-          }`}
-        >
+        <p className={`text-xs mb-4 font-medium font-mono ${featured ? "text-white" : "text-black"}`}>
           Delivery: {duration}
         </p>
       )}
       {availability && (
-        <p
-          className={`text-xs mb-4 ${
-            featured ? "text-vantage-black-30" : "text-vantage-medium-grey"
-          }`}
-        >
+        <p className={`text-xs mb-4 ${featured ? "text-white" : "text-black"}`}>
           {availability}
         </p>
       )}
@@ -282,8 +258,8 @@ function ServiceCard({
           href={cta.href}
           className={`w-full text-center font-bold py-3 rounded-full text-sm transition-all ${
             featured
-              ? "bg-vantage-gold text-vantage-black hover:brightness-110"
-              : "bg-vantage-black text-white hover:bg-vantage-black-90"
+              ? "border border-white text-white hover:bg-white hover:text-black"
+              : "bg-black text-white hover:opacity-80"
           }`}
         >
           {cta.label}
@@ -291,10 +267,8 @@ function ServiceCard({
         {secondaryCta && (
           <Link
             href={secondaryCta.href}
-            className={`w-full text-center text-sm py-2 transition-colors ${
-              featured
-                ? "text-vantage-black-30 hover:text-white"
-                : "text-vantage-dark-grey hover:text-vantage-black"
+            className={`w-full text-center text-sm py-2 transition-opacity hover:opacity-60 ${
+              featured ? "text-white" : "text-black"
             }`}
           >
             {secondaryCta.label}

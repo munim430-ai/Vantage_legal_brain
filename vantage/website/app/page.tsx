@@ -18,9 +18,9 @@ export default function HomePage() {
         <ProblemCards />
         <SprintOffer />
         <DashboardPreview />
-        <section className="bg-white py-14 border-t border-vantage-black-10">
+        <section className="bg-white py-14 border-t border-black">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
-            <h2 className="text-lg font-semibold text-vantage-black mb-4">
+            <h2 className="text-lg font-semibold text-black mb-4">
               VANTAGE service boundaries
             </h2>
             <LegalDisclaimer variant="short" className="max-w-2xl" />
