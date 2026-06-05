@@ -7,6 +7,8 @@ interface SprintCTAProps {
   complianceScore: number;
 }
 
+const btnBase = "inline-flex items-center justify-center font-semibold px-6 py-3 rounded-full text-sm transition-all text-center";
+
 export default function SprintCTA({ riskBand, complianceScore }: SprintCTAProps) {
   const waMessage = `I just completed the VANTAGE gap scan. My score is ${complianceScore}/100. I want to book the Sprint.`;
 
@@ -15,13 +17,13 @@ export default function SprintCTA({ riskBand, complianceScore }: SprintCTAProps)
       <div className="flex flex-col sm:flex-row gap-3">
         <Link
           href="/book?offer=gap-report"
-          className="bg-vantage-teal text-white font-semibold px-6 py-3 rounded text-center hover:bg-teal-700 transition-colors"
+          className={`${btnBase} bg-vantage-teal text-white hover:opacity-90`}
         >
           Request a Full Gap Report →
         </Link>
         <Link
           href="/pricing"
-          className="border border-vantage-black-10 text-vantage-dark-grey px-6 py-3 rounded text-center hover:border-vantage-teal hover:text-vantage-teal transition-colors"
+          className={`${btnBase} border border-vantage-black-10 text-vantage-dark-grey hover:border-vantage-black hover:text-vantage-black`}
         >
           See all services
         </Link>
@@ -29,12 +31,12 @@ export default function SprintCTA({ riskBand, complianceScore }: SprintCTAProps)
     );
   }
 
-  if (riskBand === "Medium Risk") {
+  if (riskBand === "Medium Risk" || riskBand === "High Risk") {
     return (
       <div className="flex flex-col sm:flex-row gap-3">
         <Link
           href="/book?offer=sprint"
-          className="bg-vantage-black text-white font-semibold px-6 py-3 rounded text-center hover:bg-vantage-black-90 transition-colors"
+          className={`${btnBase} bg-vantage-black text-white hover:bg-vantage-black-90`}
         >
           Start the BLA 2026 Compliance Sprint — BDT 55,000 →
         </Link>
@@ -42,28 +44,7 @@ export default function SprintCTA({ riskBand, complianceScore }: SprintCTAProps)
           href={whatsappLink(waMessage)}
           target="_blank"
           rel="noopener noreferrer"
-          className="border border-vantage-black-10 text-vantage-dark-grey px-6 py-3 rounded text-center hover:border-vantage-teal hover:text-vantage-teal transition-colors"
-        >
-          Book Sprint on WhatsApp
-        </a>
-      </div>
-    );
-  }
-
-  if (riskBand === "High Risk") {
-    return (
-      <div className="flex flex-col sm:flex-row gap-3">
-        <Link
-          href="/book?offer=sprint"
-          className="bg-vantage-black text-white font-semibold px-6 py-3 rounded text-center hover:bg-vantage-black-90 transition-colors"
-        >
-          Start the BLA 2026 Compliance Sprint — BDT 55,000 →
-        </Link>
-        <a
-          href={whatsappLink(waMessage)}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="border border-vantage-black-10 text-vantage-dark-grey px-6 py-3 rounded text-center hover:border-vantage-teal hover:text-vantage-teal transition-colors"
+          className={`${btnBase} border border-vantage-black-10 text-vantage-dark-grey hover:border-vantage-black hover:text-vantage-black`}
         >
           Book Sprint on WhatsApp
         </a>
@@ -76,7 +57,7 @@ export default function SprintCTA({ riskBand, complianceScore }: SprintCTAProps)
     <div className="flex flex-col sm:flex-row gap-3">
       <Link
         href="/book?offer=sprint&urgency=critical"
-        className="bg-vantage-gold text-vantage-black font-semibold px-6 py-3 rounded text-center hover:bg-yellow-400 transition-colors"
+        className={`${btnBase} bg-vantage-gold text-vantage-black hover:brightness-110`}
       >
         Book Your Sprint Now — BDT 55,000 →
       </Link>
@@ -84,7 +65,7 @@ export default function SprintCTA({ riskBand, complianceScore }: SprintCTAProps)
         href={whatsappLink(waMessage)}
         target="_blank"
         rel="noopener noreferrer"
-        className="border border-vantage-black-50 text-vantage-black-10 px-6 py-3 rounded text-center hover:border-white hover:text-white transition-colors"
+        className={`${btnBase} border border-white/30 text-white hover:bg-white/10`}
       >
         Book Sprint on WhatsApp
       </a>

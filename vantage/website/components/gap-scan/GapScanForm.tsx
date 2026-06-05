@@ -8,6 +8,8 @@ import { QuestionCard, Q25Card } from "./QuestionGroup";
 import ProgressIndicator from "./ProgressIndicator";
 import RiskResultCard from "./RiskResultCard";
 import LegalDisclaimer from "@/components/layout/LegalDisclaimer";
+import VantageField from "@/components/ui/VantageField";
+import { inputClass } from "@/components/ui/VantageInput";
 
 const DISTRICT_OPTIONS = [
   "Dhaka", "Gazipur", "Ashulia", "Narayanganj", "Chittagong", "Comilla EPZ", "Other",
@@ -83,17 +85,26 @@ export default function GapScanForm() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [form.answers, form.q25_doc1, form.q25_doc2, form.q25_doc3, step]);
 
-  const updateField = useCallback(<K extends keyof GapScanFormData>(key: K, value: GapScanFormData[K]) => {
-    setForm((prev) => ({ ...prev, [key]: value }));
-    setErrors((prev) => { const e = { ...prev }; delete e[key]; return e; });
-  }, []);
+  const updateField = useCallback(
+    <K extends keyof GapScanFormData>(key: K, value: GapScanFormData[K]) => {
+      setForm((prev) => ({ ...prev, [key]: value }));
+      setErrors((prev) => {
+        const e = { ...prev };
+        delete e[key];
+        return e;
+      });
+    },
+    []
+  );
 
   const toggleFramework = (fw: string) => {
     setForm((prev) => {
       const current = prev.audit_frameworks;
       return {
         ...prev,
-        audit_frameworks: current.includes(fw) ? current.filter((f) => f !== fw) : [...current, fw],
+        audit_frameworks: current.includes(fw)
+          ? current.filter((f) => f !== fw)
+          : [...current, fw],
       };
     });
   };
@@ -101,7 +112,9 @@ export default function GapScanForm() {
   const updateAnswer = (updated: QuestionAnswer) => {
     setForm((prev) => ({
       ...prev,
-      answers: prev.answers.map((a) => (a.questionId === updated.questionId ? updated : a)),
+      answers: prev.answers.map((a) =>
+        a.questionId === updated.questionId ? updated : a
+      ),
     }));
   };
 
@@ -143,7 +156,10 @@ export default function GapScanForm() {
 
   const handleContinue = () => {
     const e = validateStep(step);
-    if (Object.keys(e).length > 0) { setErrors(e); return; }
+    if (Object.keys(e).length > 0) {
+      setErrors(e);
+      return;
+    }
     setErrors({});
     setStep((s) => s + 1);
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -157,11 +173,13 @@ export default function GapScanForm() {
 
   const handleSubmit = async () => {
     const e = validateStep(4);
-    if (Object.keys(e).length > 0) { setErrors(e); return; }
+    if (Object.keys(e).length > 0) {
+      setErrors(e);
+      return;
+    }
     setSubmitting(true);
     setStorageNotice(null);
 
-    // Calculate locally — result screen is never blocked by API
     const localScored = calculateScore(form);
 
     try {
@@ -174,7 +192,8 @@ export default function GapScanForm() {
 
       if (!res.ok) {
         setStorageNotice({
-          message: "Your score was generated, but the submission could not be stored. Please contact VANTAGE on WhatsApp.",
+          message:
+            "Your score was generated, but the submission could not be stored. Please contact VANTAGE on WhatsApp.",
           variant: "warning",
         });
       } else if (data.stored === true) {
@@ -189,13 +208,15 @@ export default function GapScanForm() {
         });
       } else {
         setStorageNotice({
-          message: "Your score was generated, but the submission could not be stored. Please contact VANTAGE on WhatsApp.",
+          message:
+            "Your score was generated, but the submission could not be stored. Please contact VANTAGE on WhatsApp.",
           variant: "warning",
         });
       }
     } catch {
       setStorageNotice({
-        message: "Your score was generated, but the submission could not be stored. Please contact VANTAGE on WhatsApp.",
+        message:
+          "Your score was generated, but the submission could not be stored. Please contact VANTAGE on WhatsApp.",
         variant: "warning",
       });
     } finally {
@@ -217,7 +238,9 @@ export default function GapScanForm() {
     return (
       <div className="max-w-2xl mx-auto px-4 py-10">
         {storageNotice && (
-          <div className={`mb-6 border-l-4 ${noticeBorder} bg-vantage-light-grey px-4 py-3 rounded-r text-sm text-vantage-dark-grey`}>
+          <div
+            className={`mb-6 border-l-4 ${noticeBorder} bg-vantage-light-grey px-4 py-3 rounded-r text-sm text-vantage-dark-grey`}
+          >
             {storageNotice.message}
           </div>
         )}
@@ -232,7 +255,10 @@ export default function GapScanForm() {
   }
 
   const answeredCount = form.answers.filter((a) => a.answer !== null).length;
-  const q25Answered = form.q25_doc1.trim() !== "" || form.q25_doc2.trim() !== "" || form.q25_doc3.trim() !== "";
+  const q25Answered =
+    form.q25_doc1.trim() !== "" ||
+    form.q25_doc2.trim() !== "" ||
+    form.q25_doc3.trim() !== "";
   const totalAnswered = answeredCount + (q25Answered ? 1 : 0);
 
   return (
@@ -245,12 +271,14 @@ export default function GapScanForm() {
       {step === 1 && (
         <div className="space-y-6">
           <LegalDisclaimer variant="full" className="mb-6" />
-          <h2 className="text-xl font-bold text-vantage-black">Step 1 — Factory Details</h2>
+          <h2 className="text-xl md:text-2xl font-black text-vantage-black tracking-tight">
+            Step 1 — Factory Details
+          </h2>
           <p className="text-sm text-vantage-dark-grey">
             Tell us about your factory so we can apply the right compliance context to your results.
           </p>
 
-          <Field label="Factory name" required error={errors.factory_name}>
+          <VantageField label="Factory name" required error={errors.factory_name}>
             <input
               type="text"
               maxLength={120}
@@ -259,42 +287,58 @@ export default function GapScanForm() {
               className={inputClass(!!errors.factory_name)}
               placeholder="e.g. Kader Knitwear Ltd"
             />
-          </Field>
+          </VantageField>
 
-          <Field label="Factory address" required error={errors.factory_address}>
+          <VantageField label="Factory address" required error={errors.factory_address}>
             <textarea
               maxLength={300}
               rows={2}
               value={form.factory_address}
               onChange={(e) => updateField("factory_address", e.target.value)}
-              className={inputClass(!!errors.factory_address)}
+              className={`${inputClass(!!errors.factory_address)} resize-none`}
               placeholder="Full factory address"
             />
-          </Field>
+          </VantageField>
 
-          <Field label="District / Industrial zone" required error={errors.district_zone}>
+          <VantageField
+            label="District / Industrial zone"
+            required
+            error={errors.district_zone}
+          >
             <select
               value={form.district_zone}
               onChange={(e) => updateField("district_zone", e.target.value)}
               className={inputClass(!!errors.district_zone)}
             >
               <option value="">Select district</option>
-              {DISTRICT_OPTIONS.map((d) => <option key={d} value={d}>{d}</option>)}
+              {DISTRICT_OPTIONS.map((d) => (
+                <option key={d} value={d}>
+                  {d}
+                </option>
+              ))}
             </select>
-          </Field>
+          </VantageField>
 
-          <Field label="Number of workers" required error={errors.worker_count_range}>
+          <VantageField
+            label="Number of workers"
+            required
+            error={errors.worker_count_range}
+          >
             <select
               value={form.worker_count_range}
               onChange={(e) => updateField("worker_count_range", e.target.value)}
               className={inputClass(!!errors.worker_count_range)}
             >
               <option value="">Select range</option>
-              {WORKER_COUNT_OPTIONS.map((o) => <option key={o} value={o}>{o}</option>)}
+              {WORKER_COUNT_OPTIONS.map((o) => (
+                <option key={o} value={o}>
+                  {o}
+                </option>
+              ))}
             </select>
-          </Field>
+          </VantageField>
 
-          <Field label="Main products (optional)">
+          <VantageField label="Main products (optional)">
             <input
               type="text"
               maxLength={100}
@@ -303,9 +347,9 @@ export default function GapScanForm() {
               className={inputClass(false)}
               placeholder="e.g. Woven, knitwear, denim"
             />
-          </Field>
+          </VantageField>
 
-          <Field label="Main buyers (optional)">
+          <VantageField label="Main buyers (optional)">
             <input
               type="text"
               maxLength={200}
@@ -314,9 +358,9 @@ export default function GapScanForm() {
               className={inputClass(false)}
               placeholder="If comfortable sharing"
             />
-          </Field>
+          </VantageField>
 
-          <Field label="Upcoming audit frameworks (optional)">
+          <VantageField label="Upcoming audit frameworks (optional)">
             <div className="flex flex-wrap gap-2 mt-1">
               {AUDIT_FRAMEWORKS.map((fw) => (
                 <button
@@ -333,16 +377,18 @@ export default function GapScanForm() {
                 </button>
               ))}
             </div>
-          </Field>
+          </VantageField>
         </div>
       )}
 
       {/* Step 2 — Your Details */}
       {step === 2 && (
         <div className="space-y-6">
-          <h2 className="text-xl font-bold text-vantage-black">Step 2 — Your Details</h2>
+          <h2 className="text-xl md:text-2xl font-black text-vantage-black tracking-tight">
+            Step 2 — Your Details
+          </h2>
 
-          <Field label="Your name" required error={errors.contact_name}>
+          <VantageField label="Your name" required error={errors.contact_name}>
             <input
               type="text"
               maxLength={100}
@@ -351,20 +397,29 @@ export default function GapScanForm() {
               className={inputClass(!!errors.contact_name)}
               autoComplete="name"
             />
-          </Field>
+          </VantageField>
 
-          <Field label="Your role" required error={errors.contact_role}>
+          <VantageField label="Your role" required error={errors.contact_role}>
             <select
               value={form.contact_role}
               onChange={(e) => updateField("contact_role", e.target.value)}
               className={inputClass(!!errors.contact_role)}
             >
               <option value="">Select your role</option>
-              {ROLE_OPTIONS.map((r) => <option key={r} value={r}>{r}</option>)}
+              {ROLE_OPTIONS.map((r) => (
+                <option key={r} value={r}>
+                  {r}
+                </option>
+              ))}
             </select>
-          </Field>
+          </VantageField>
 
-          <Field label="WhatsApp number" required error={errors.whatsapp_number}>
+          <VantageField
+            label="WhatsApp number"
+            required
+            error={errors.whatsapp_number}
+            hint="VANTAGE uses your WhatsApp number to send your gap scan results and follow up within 24 hours. Your data is not shared with third parties. Reply STOP at any time to opt out."
+          >
             <input
               type="tel"
               value={form.whatsapp_number}
@@ -375,13 +430,9 @@ export default function GapScanForm() {
               inputMode="tel"
               maxLength={11}
             />
-            <p className="text-xs text-vantage-medium-grey mt-1">
-              VANTAGE uses your WhatsApp number to send your gap scan results and follow up within 24 hours.
-              Your data is not shared with third parties. Reply STOP at any time to opt out.
-            </p>
-          </Field>
+          </VantageField>
 
-          <Field label="Email address (optional)" error={errors.email}>
+          <VantageField label="Email address (optional)" error={errors.email}>
             <input
               type="email"
               value={form.email}
@@ -390,9 +441,9 @@ export default function GapScanForm() {
               autoComplete="email"
               inputMode="email"
             />
-          </Field>
+          </VantageField>
 
-          <Field label="Are you the decision-maker for compliance services?">
+          <VantageField label="Are you the decision-maker for compliance services?">
             <div className="flex gap-4 mt-1">
               {["yes", "no"].map((v) => (
                 <label key={v} className="flex items-center gap-2 cursor-pointer">
@@ -408,29 +459,44 @@ export default function GapScanForm() {
                 </label>
               ))}
             </div>
-          </Field>
+          </VantageField>
         </div>
       )}
 
       {/* Step 3 — Audit Urgency */}
       {step === 3 && (
         <div className="space-y-6">
-          <h2 className="text-xl font-bold text-vantage-black">Step 3 — Audit Urgency</h2>
+          <h2 className="text-xl md:text-2xl font-black text-vantage-black tracking-tight">
+            Step 3 — Audit Urgency
+          </h2>
           <p className="text-sm text-vantage-dark-grey">
-            This information helps us prioritise your gap scan results and recommend the right level of support.
+            This information helps us prioritise your gap scan results and recommend the right
+            level of support.
           </p>
 
-          <Field label="Is there an upcoming audit scheduled?" required error={errors.upcoming_audit}>
+          <VantageField
+            label="Is there an upcoming audit scheduled?"
+            required
+            error={errors.upcoming_audit}
+          >
             <RadioGroup
               name="upcoming_audit"
-              options={[{ value: "yes", label: "Yes" }, { value: "no", label: "No" }, { value: "not_sure", label: "Not sure" }]}
+              options={[
+                { value: "yes", label: "Yes" },
+                { value: "no", label: "No" },
+                { value: "not_sure", label: "Not sure" },
+              ]}
               value={form.upcoming_audit}
               onChange={(v) => updateField("upcoming_audit", v)}
             />
-          </Field>
+          </VantageField>
 
           {form.upcoming_audit === "yes" && (
-            <Field label="Approximate audit date" required error={errors.upcoming_audit_date}>
+            <VantageField
+              label="Approximate audit date"
+              required
+              error={errors.upcoming_audit_date}
+            >
               <input
                 type="date"
                 value={form.upcoming_audit_date}
@@ -438,20 +504,31 @@ export default function GapScanForm() {
                 onChange={(e) => updateField("upcoming_audit_date", e.target.value)}
                 className={inputClass(!!errors.upcoming_audit_date)}
               />
-            </Field>
+            </VantageField>
           )}
 
-          <Field label="Has the factory received a CAP from a recent audit?" required error={errors.recent_failed_audit}>
+          <VantageField
+            label="Has the factory received a CAP from a recent audit?"
+            required
+            error={errors.recent_failed_audit}
+          >
             <RadioGroup
               name="recent_failed_audit"
-              options={[{ value: "yes", label: "Yes" }, { value: "no", label: "No" }]}
+              options={[
+                { value: "yes", label: "Yes" },
+                { value: "no", label: "No" },
+              ]}
               value={form.recent_failed_audit}
               onChange={(v) => updateField("recent_failed_audit", v)}
             />
-          </Field>
+          </VantageField>
 
           {form.recent_failed_audit === "yes" && (
-            <Field label="CAP deadline" required error={errors.cap_deadline}>
+            <VantageField
+              label="CAP deadline"
+              required
+              error={errors.cap_deadline}
+            >
               <input
                 type="date"
                 value={form.cap_deadline}
@@ -459,17 +536,20 @@ export default function GapScanForm() {
                 onChange={(e) => updateField("cap_deadline", e.target.value)}
                 className={inputClass(!!errors.cap_deadline)}
               />
-            </Field>
+            </VantageField>
           )}
 
-          <Field label="Has the factory received a buyer compliance request or demand letter?">
+          <VantageField label="Has the factory received a buyer compliance request or demand letter?">
             <RadioGroup
               name="buyer_pressure"
-              options={[{ value: "yes", label: "Yes" }, { value: "no", label: "No" }]}
+              options={[
+                { value: "yes", label: "Yes" },
+                { value: "no", label: "No" },
+              ]}
               value={form.buyer_pressure}
               onChange={(v) => updateField("buyer_pressure", v)}
             />
-          </Field>
+          </VantageField>
         </div>
       )}
 
@@ -477,24 +557,29 @@ export default function GapScanForm() {
       {step === 4 && (
         <div>
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-bold text-vantage-black">Step 4 — Gap Scan Questions</h2>
-            <span className="text-sm text-vantage-medium-grey">{totalAnswered} / 25 answered</span>
+            <h2 className="text-xl md:text-2xl font-black text-vantage-black tracking-tight">
+              Step 4 — Gap Scan Questions
+            </h2>
+            <span className="text-sm text-vantage-medium-grey font-mono">
+              {totalAnswered} / 25
+            </span>
           </div>
 
           <p className="text-sm text-vantage-dark-grey mb-6">
             Answer each question based on your factory&apos;s current records and processes.
-            &ldquo;Not sure&rdquo; is scored the same as &ldquo;No&rdquo; &mdash; the conservative approach.
+            &ldquo;Not sure&rdquo; is scored the same as &ldquo;No&rdquo; &mdash; the
+            conservative approach.
           </p>
 
           {errors.questions && (
-            <div className="bg-red-50 border border-red-200 text-red-700 text-sm px-4 py-3 rounded mb-4">
+            <div className="border-l-4 border-vantage-gold bg-vantage-light-grey px-4 py-3 rounded-r text-sm text-vantage-black mb-4">
               {errors.questions}
             </div>
           )}
 
-          {/* Live score bar (mobile sticky) */}
+          {/* Live score bar */}
           {liveScore && (
-            <div className="sticky top-0 z-10 bg-vantage-black text-white px-4 py-3 rounded mb-4 flex items-center justify-between text-sm">
+            <div className="sticky top-0 z-10 bg-vantage-black text-white px-4 py-3 rounded mb-4 flex items-center justify-between text-sm font-mono">
               <span>
                 Score: <strong>{liveScore.complianceScore}/100</strong>
               </span>
@@ -509,7 +594,12 @@ export default function GapScanForm() {
             {QUESTIONS.slice(0, 24).map((q) => {
               const answer = form.answers.find((a) => a.questionId === q.id)!;
               return (
-                <QuestionCard key={q.id} question={q} answer={answer} onChange={updateAnswer} />
+                <QuestionCard
+                  key={q.id}
+                  question={q}
+                  answer={answer}
+                  onChange={updateAnswer}
+                />
               );
             })}
 
@@ -530,24 +620,43 @@ export default function GapScanForm() {
       {/* Step 5 — Review & Submit */}
       {step === 5 && (
         <div className="space-y-6">
-          <h2 className="text-xl font-bold text-vantage-black">Step 5 — Review and Submit</h2>
+          <h2 className="text-xl md:text-2xl font-black text-vantage-black tracking-tight">
+            Step 5 — Review and Submit
+          </h2>
 
           {liveScore && (
-            <div className="bg-vantage-light-grey rounded p-5">
-              <div className="text-sm text-vantage-dark-grey space-y-1">
-                <div>Questions answered: <strong>{totalAnswered} of 25</strong></div>
-                <div>Risk score: <strong>{liveScore.riskScore} / 141</strong></div>
-                <div>Compliance score: <strong>{liveScore.complianceScore} / 100</strong></div>
-                <div>Risk level: <strong>{liveScore.riskBand}</strong></div>
+            <div className="bg-vantage-light-grey rounded-xl p-5">
+              <div className="text-sm text-vantage-dark-grey space-y-1 font-mono">
+                <div>
+                  Questions answered: <strong>{totalAnswered} of 25</strong>
+                </div>
+                <div>
+                  Risk score: <strong>{liveScore.riskScore} / 141</strong>
+                </div>
+                <div>
+                  Compliance score: <strong>{liveScore.complianceScore} / 100</strong>
+                </div>
+                <div>
+                  Risk level: <strong>{liveScore.riskBand}</strong>
+                </div>
               </div>
             </div>
           )}
 
-          <div className="bg-vantage-light-grey rounded p-5 text-sm text-vantage-dark-grey space-y-1">
-            <div><strong>Factory:</strong> {form.factory_name || "—"}</div>
-            <div><strong>District:</strong> {form.district_zone || "—"}</div>
-            <div><strong>Contact:</strong> {form.contact_name || "—"} ({form.contact_role || "—"})</div>
-            <div><strong>WhatsApp:</strong> {form.whatsapp_number || "—"}</div>
+          <div className="bg-vantage-light-grey rounded-xl p-5 text-sm text-vantage-dark-grey space-y-1">
+            <div>
+              <strong>Factory:</strong> {form.factory_name || "—"}
+            </div>
+            <div>
+              <strong>District:</strong> {form.district_zone || "—"}
+            </div>
+            <div>
+              <strong>Contact:</strong> {form.contact_name || "—"} (
+              {form.contact_role || "—"})
+            </div>
+            <div>
+              <strong>WhatsApp:</strong> {form.whatsapp_number || "—"}
+            </div>
           </div>
 
           <LegalDisclaimer variant="full" />
@@ -556,21 +665,21 @@ export default function GapScanForm() {
             type="button"
             onClick={handleSubmit}
             disabled={submitting}
-            className="w-full bg-vantage-black text-white font-semibold py-4 rounded hover:bg-vantage-black-90 transition-colors text-lg disabled:opacity-60 disabled:cursor-not-allowed"
+            className="w-full bg-vantage-gold text-vantage-black font-bold py-4 rounded-full hover:brightness-110 transition-all text-base disabled:opacity-60 disabled:cursor-not-allowed"
           >
             {submitting ? "Submitting…" : "Submit Gap Scan →"}
           </button>
         </div>
       )}
 
-      {/* Navigation buttons */}
+      {/* Navigation */}
       {step < 5 && (
         <div className="flex justify-between mt-10">
           {step > 1 ? (
             <button
               type="button"
               onClick={handleBack}
-              className="border border-vantage-black-10 text-vantage-dark-grey px-6 py-3 rounded hover:border-vantage-black transition-colors"
+              className="border border-vantage-black-10 text-vantage-dark-grey px-6 py-3 rounded-full hover:border-vantage-black transition-colors text-sm"
             >
               ← Back
             </button>
@@ -580,7 +689,7 @@ export default function GapScanForm() {
           <button
             type="button"
             onClick={handleContinue}
-            className="bg-vantage-black text-white font-semibold px-8 py-3 rounded hover:bg-vantage-black-90 transition-colors"
+            className="bg-vantage-black text-white font-bold px-8 py-3 rounded-full hover:bg-vantage-black-90 transition-colors text-sm"
           >
             Continue →
           </button>
@@ -591,43 +700,12 @@ export default function GapScanForm() {
           <button
             type="button"
             onClick={handleBack}
-            className="border border-vantage-black-10 text-vantage-dark-grey px-6 py-3 rounded hover:border-vantage-black transition-colors"
+            className="border border-vantage-black-10 text-vantage-dark-grey px-6 py-3 rounded-full hover:border-vantage-black transition-colors text-sm"
           >
             ← Back
           </button>
         </div>
       )}
-    </div>
-  );
-}
-
-function inputClass(hasError: boolean) {
-  return `w-full text-sm border rounded px-3 py-2.5 focus:outline-none transition-colors ${
-    hasError
-      ? "border-red-400 focus:border-red-500"
-      : "border-vantage-black-10 focus:border-vantage-teal"
-  }`;
-}
-
-function Field({
-  label,
-  required,
-  error,
-  children,
-}: {
-  label: string;
-  required?: boolean;
-  error?: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div>
-      <label className="block text-sm font-medium text-vantage-black mb-1.5">
-        {label}
-        {required && <span className="text-red-500 ml-1">*</span>}
-      </label>
-      {children}
-      {error && <p className="text-xs text-red-600 mt-1">{error}</p>}
     </div>
   );
 }
