@@ -26,9 +26,9 @@ const ctaClass: Record<HeaderVariant, string> = {
 };
 
 const logoSrc: Record<HeaderVariant, string> = {
-  overlay: "/brand/logo-wordmark-white-on-black.jpeg",
-  dark: "/brand/logo-wordmark-white-on-black.jpeg",
-  light: "/brand/logo-wordmark-black-on-white.jpeg",
+  overlay: "/brand/White.jpeg",
+  dark: "/brand/White.jpeg",
+  light: "/brand/Black.jpeg",
 };
 
 const NAV = [
@@ -46,9 +46,9 @@ export default function Header({ variant = "dark" }: HeaderProps) {
           <Image
             src={logoSrc[variant]}
             alt="VANTAGE"
-            width={140}
-            height={36}
-            className="h-7 w-auto"
+            width={120}
+            height={40}
+            className="h-auto w-[96px] md:w-[120px] object-contain"
             priority
           />
         </Link>

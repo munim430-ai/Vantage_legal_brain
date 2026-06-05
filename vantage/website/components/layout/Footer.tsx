@@ -17,11 +17,11 @@ export default function Footer() {
           {/* Brand */}
           <div className="flex flex-col gap-3">
             <Image
-              src="/brand/logo-wordmark-white-on-black.jpeg"
+              src="/brand/White.jpeg"
               alt="VANTAGE"
-              width={130}
-              height={34}
-              className="h-7 w-auto"
+              width={160}
+              height={54}
+              className="h-auto w-[160px] object-contain"
             />
             <p className="text-sm text-vantage-black-30 max-w-xs">
               Keystone Consultancy trading as VANTAGE
