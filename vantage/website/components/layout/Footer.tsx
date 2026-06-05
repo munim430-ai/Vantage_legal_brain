@@ -15,7 +15,6 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-8">
           {/* Brand */}
           <div className="flex flex-col gap-3">
-            <span className="font-black tracking-[-0.08em] text-2xl text-white">VANTAGE</span>
             <p className="text-sm text-white max-w-xs">
               Keystone Consultancy trading as VANTAGE
             </p>
@@ -49,6 +48,9 @@ export default function Footer() {
           <p className="text-xs text-white mt-3">
             &copy; {year} Keystone Consultancy. All rights reserved.
           </p>
+          <span className="font-black tracking-[-0.08em] text-white mt-8 block" style={{ fontSize: "clamp(3rem, 8vw, 7rem)", lineHeight: "0.9" }}>
+            VANTAGE
+          </span>
         </div>
       </div>
     </footer>
