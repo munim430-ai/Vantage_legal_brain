@@ -230,7 +230,7 @@ export default function GapScanForm() {
 
   if (result) {
     return (
-      <div className="max-w-2xl mx-auto px-4 py-10">
+      <div className="max-w-2xl mx-auto px-4 py-10 result-reveal">
         {storageNotice && (
           <div className="mb-6 border-l-4 border-black px-4 py-3 text-sm text-black">
             {storageNotice.message}
@@ -261,7 +261,7 @@ export default function GapScanForm() {
 
       {/* Step 1 — Factory Details */}
       {step === 1 && (
-        <div className="space-y-6">
+        <div className="space-y-6 step-reveal">
           <LegalDisclaimer variant="full" className="mb-6" />
           <h2 className="text-xl md:text-2xl font-black text-black tracking-tight">
             Step 1 — Factory Details
@@ -375,7 +375,7 @@ export default function GapScanForm() {
 
       {/* Step 2 — Your Details */}
       {step === 2 && (
-        <div className="space-y-6">
+        <div className="space-y-6 step-reveal">
           <h2 className="text-xl md:text-2xl font-black text-black tracking-tight">
             Step 2 — Your Details
           </h2>
@@ -457,7 +457,7 @@ export default function GapScanForm() {
 
       {/* Step 3 — Audit Urgency */}
       {step === 3 && (
-        <div className="space-y-6">
+        <div className="space-y-6 step-reveal">
           <h2 className="text-xl md:text-2xl font-black text-black tracking-tight">
             Step 3 — Audit Urgency
           </h2>
@@ -547,7 +547,7 @@ export default function GapScanForm() {
 
       {/* Step 4 — Gap Scan Questions */}
       {step === 4 && (
-        <div>
+        <div className="step-reveal">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl md:text-2xl font-black text-black tracking-tight">
               Step 4 — Gap Scan Questions
@@ -611,7 +611,7 @@ export default function GapScanForm() {
 
       {/* Step 5 — Review & Submit */}
       {step === 5 && (
-        <div className="space-y-6">
+        <div className="space-y-6 step-reveal">
           <h2 className="text-xl md:text-2xl font-black text-black tracking-tight">
             Step 5 — Review and Submit
           </h2>

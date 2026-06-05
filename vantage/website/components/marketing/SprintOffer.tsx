@@ -1,4 +1,5 @@
 import Link from "next/link";
+import MotionReveal from "@/components/ui/MotionReveal";
 
 const deliverables = [
   "Gap report — section-by-section BLA 2006 analysis",
@@ -35,31 +36,24 @@ export default function SprintOffer() {
       {/* Service tiers */}
       <section className="bg-black text-white py-16 md:py-20 overflow-x-hidden">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="max-w-xl mb-10">
+          <MotionReveal variant="blurIn" className="max-w-xl mb-10">
             <p className="text-xs font-semibold uppercase tracking-[0.12em] text-white mb-4">
               Service Stack
             </p>
             <h2 className="text-2xl md:text-3xl font-black text-white tracking-tight leading-tight">
               Three ways to work with VANTAGE
             </h2>
-          </div>
+          </MotionReveal>
           <div className="grid md:grid-cols-3 gap-4">
-            <TierCard
-              badge="Free"
-              heading="Gap Scan"
-              body="A 90-minute structured assessment identifies your BLA 2006 compliance gaps. Risk score and gap summary delivered. No cost. No commitment."
-            />
-            <TierCard
-              badge="BDT 55,000"
-              heading="Compliance Sprint"
-              body="3 to 5 working day intensive. Full gap report, corrective action plan, and up to 5 remediated policy documents — all mapped to BLA sections and audit evidence requirements."
-              featured
-            />
-            <TierCard
-              badge="BDT 30,000 / mo"
-              heading="Compliance Retainer"
-              body="Monthly advisory support. VANTAGE monitors regulatory changes, reviews your documents, and answers compliance questions year-round."
-            />
+            {[
+              { badge: "Free", heading: "Gap Scan", body: "A 90-minute structured assessment identifies your BLA 2006 compliance gaps. Risk score and gap summary delivered. No cost. No commitment.", featured: false },
+              { badge: "BDT 55,000", heading: "Compliance Sprint", body: "3 to 5 working day intensive. Full gap report, corrective action plan, and up to 5 remediated policy documents — all mapped to BLA sections and audit evidence requirements.", featured: true },
+              { badge: "BDT 30,000 / mo", heading: "Compliance Retainer", body: "Monthly advisory support. VANTAGE monitors regulatory changes, reviews your documents, and answers compliance questions year-round.", featured: false },
+            ].map((tier, i) => (
+              <MotionReveal key={tier.heading} variant="fadeUp" delay={i * 100}>
+                <TierCard {...tier} />
+              </MotionReveal>
+            ))}
           </div>
         </div>
       </section>
@@ -69,60 +63,66 @@ export default function SprintOffer() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="grid md:grid-cols-2 gap-14 items-start">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-black mb-4">
-                Sprint Product Sheet
-              </p>
-              <h2 className="text-2xl md:text-3xl font-black text-black tracking-tight leading-tight mb-3">
-                BLA 2026 Compliance Sprint
-              </h2>
-              <p className="text-black mb-8 text-base">
-                From gap scan to corrective action plan — in 3 to 5 working days.
-              </p>
+              <MotionReveal variant="blurIn">
+                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-black mb-4">
+                  Sprint Product Sheet
+                </p>
+                <h2 className="text-2xl md:text-3xl font-black text-black tracking-tight leading-tight mb-3">
+                  BLA 2026 Compliance Sprint
+                </h2>
+                <p className="text-black mb-8 text-base">
+                  From gap scan to corrective action plan — in 3 to 5 working days.
+                </p>
+              </MotionReveal>
               <ul className="space-y-3">
-                {deliverables.map((d) => (
-                  <li key={d} className="flex items-start gap-3">
-                    <span className="text-black mt-0.5 shrink-0 font-bold text-sm">
-                      ✓
-                    </span>
-                    <span className="text-black text-sm leading-relaxed">{d}</span>
-                  </li>
+                {deliverables.map((d, i) => (
+                  <MotionReveal key={d} variant="lineWipe" delay={i * 60}>
+                    <li className="flex items-start gap-3">
+                      <span className="text-black mt-0.5 shrink-0 font-bold text-sm">
+                        ✓
+                      </span>
+                      <span className="text-black text-sm leading-relaxed">{d}</span>
+                    </li>
+                  </MotionReveal>
                 ))}
               </ul>
             </div>
 
             {/* Pricing card */}
-            <div className="bg-black text-white rounded-2xl p-8 flex flex-col gap-6">
-              <div>
-                <p className="text-[10px] font-semibold uppercase tracking-widest text-white mb-3">
-                  Sprint Investment
-                </p>
-                <div className="text-white text-5xl font-black tracking-tight">
-                  BDT 55,000
+            <MotionReveal variant="scaleIn" delay={120}>
+              <div className="bg-black text-white rounded-2xl p-8 flex flex-col gap-6">
+                <div>
+                  <p className="text-[10px] font-semibold uppercase tracking-widest text-white mb-3">
+                    Sprint Investment
+                  </p>
+                  <div className="text-white text-5xl font-black tracking-tight">
+                    BDT 55,000
+                  </div>
+                  <div className="text-white text-sm mt-2">
+                    All inclusive · No hidden fees
+                  </div>
                 </div>
-                <div className="text-white text-sm mt-2">
-                  All inclusive · No hidden fees
+                <div className="space-y-1.5 text-sm text-white font-mono">
+                  <div>→ 50% before Sprint start</div>
+                  <div>→ 50% on delivery</div>
+                  <div>→ No travel charge within Dhaka / Gazipur</div>
+                </div>
+                <div className="border-t border-white pt-6 flex flex-col gap-3">
+                  <Link
+                    href="/gap-scan"
+                    className="border border-white text-white font-bold py-3.5 rounded-full text-center text-sm hover:bg-white hover:text-black transition-all"
+                  >
+                    Start Free Gap Scan →
+                  </Link>
+                  <Link
+                    href="/pricing"
+                    className="text-white text-sm text-center hover:opacity-60 transition-opacity"
+                  >
+                    See full service stack →
+                  </Link>
                 </div>
               </div>
-              <div className="space-y-1.5 text-sm text-white font-mono">
-                <div>→ 50% before Sprint start</div>
-                <div>→ 50% on delivery</div>
-                <div>→ No travel charge within Dhaka / Gazipur</div>
-              </div>
-              <div className="border-t border-white pt-6 flex flex-col gap-3">
-                <Link
-                  href="/gap-scan"
-                  className="border border-white text-white font-bold py-3.5 rounded-full text-center text-sm hover:bg-white hover:text-black transition-all"
-                >
-                  Start Free Gap Scan →
-                </Link>
-                <Link
-                  href="/pricing"
-                  className="text-white text-sm text-center hover:opacity-60 transition-opacity"
-                >
-                  See full service stack →
-                </Link>
-              </div>
-            </div>
+            </MotionReveal>
           </div>
         </div>
       </section>
@@ -130,22 +130,26 @@ export default function SprintOffer() {
       {/* How it works */}
       <section className="bg-black py-16 md:py-24 overflow-x-hidden">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <h2 className="text-2xl md:text-3xl font-black text-white tracking-tight mb-12">
-            How VANTAGE works
-          </h2>
+          <MotionReveal variant="blurIn">
+            <h2 className="text-2xl md:text-3xl font-black text-white tracking-tight mb-12">
+              How VANTAGE works
+            </h2>
+          </MotionReveal>
           <div className="grid md:grid-cols-3 gap-8">
-            {steps.map((s) => (
-              <div key={s.num} className="flex flex-col gap-4">
-                <div className="text-5xl font-black text-white leading-none tracking-tighter font-mono">
-                  {s.num}
+            {steps.map((s, i) => (
+              <MotionReveal key={s.num} variant="fadeUp" delay={i * 120}>
+                <div className="flex flex-col gap-4">
+                  <div className="text-5xl font-black text-white leading-none tracking-tighter font-mono">
+                    {s.num}
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-white mb-2 text-base leading-snug">
+                      {s.heading}
+                    </h3>
+                    <p className="text-sm text-white leading-relaxed">{s.body}</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-bold text-white mb-2 text-base leading-snug">
-                    {s.heading}
-                  </h3>
-                  <p className="text-sm text-white leading-relaxed">{s.body}</p>
-                </div>
-              </div>
+              </MotionReveal>
             ))}
           </div>
         </div>
@@ -167,7 +171,7 @@ function TierCard({
 }) {
   return (
     <div
-      className={`rounded-2xl p-6 flex flex-col gap-4 ${
+      className={`rounded-2xl p-6 flex flex-col gap-4 h-full ${
         featured ? "bg-white text-black" : "border border-white text-white"
       }`}
     >

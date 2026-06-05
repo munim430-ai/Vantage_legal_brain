@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { WHATSAPP_DEFAULT } from "@/lib/brand/tokens";
+import MotionReveal from "@/components/ui/MotionReveal";
 
 const modules = [
   {
@@ -45,7 +46,7 @@ export default function DashboardPreview() {
       {/* Control Tower modules */}
       <section className="bg-white py-16 md:py-24 overflow-x-hidden border-t border-black">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="max-w-2xl mb-10">
+          <MotionReveal variant="blurIn" className="max-w-2xl mb-10">
             <p className="text-xs font-semibold uppercase tracking-[0.12em] text-black mb-4">
               Control Tower Preview
             </p>
@@ -56,17 +57,16 @@ export default function DashboardPreview() {
               VANTAGE gap assessment covers the sections of BLA 2006 that generate the most
               nonconformity findings in BSCI, SMETA, SA8000, and RSC assessments.
             </p>
-          </div>
+          </MotionReveal>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {modules.map((m) => (
-              <div
-                key={m.title}
-                className="border border-black rounded-xl p-5 hover:bg-black hover:text-white transition-all group"
-              >
-                <div className="text-[10px] font-mono text-black group-hover:text-white mb-3">{m.id}</div>
-                <h3 className="font-bold text-black group-hover:text-white mb-2 text-sm leading-snug">{m.title}</h3>
-                <p className="text-xs text-black group-hover:text-white leading-relaxed">{m.detail}</p>
-              </div>
+            {modules.map((m, i) => (
+              <MotionReveal key={m.title} variant="scaleIn" delay={i * 70}>
+                <div className="border border-black rounded-xl p-5 hover:bg-black hover:text-white transition-all group h-full">
+                  <div className="text-[10px] font-mono text-black group-hover:text-white mb-3">{m.id}</div>
+                  <h3 className="font-bold text-black group-hover:text-white mb-2 text-sm leading-snug">{m.title}</h3>
+                  <p className="text-xs text-black group-hover:text-white leading-relaxed">{m.detail}</p>
+                </div>
+              </MotionReveal>
             ))}
           </div>
         </div>
@@ -75,60 +75,64 @@ export default function DashboardPreview() {
       {/* Audit standards */}
       <section className="bg-black text-white py-10 overflow-x-hidden">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <h3 className="text-xs font-semibold text-white uppercase tracking-widest mb-4">
-            Aligned with international audit frameworks
-          </h3>
-          <p className="text-white mb-3 max-w-2xl text-sm leading-relaxed">
-            VANTAGE audit-preparation support is aligned with the evidence requirements of:{" "}
-            <span className="font-semibold text-white">
-              BSCI · WRAP · SA8000 · Sedex / SMETA · Better Work · RSC
-            </span>
-          </p>
-          <p className="text-xs text-white max-w-2xl">
-            VANTAGE is not affiliated with, approved by, or a representative of any audit body.
-            We provide compliance guidance and audit-preparation support only.
-          </p>
+          <MotionReveal variant="lineWipe">
+            <h3 className="text-xs font-semibold text-white uppercase tracking-widest mb-4">
+              Aligned with international audit frameworks
+            </h3>
+            <p className="text-white mb-3 max-w-2xl text-sm leading-relaxed">
+              VANTAGE audit-preparation support is aligned with the evidence requirements of:{" "}
+              <span className="font-semibold text-white">
+                BSCI · WRAP · SA8000 · Sedex / SMETA · Better Work · RSC
+              </span>
+            </p>
+            <p className="text-xs text-white max-w-2xl">
+              VANTAGE is not affiliated with, approved by, or a representative of any audit body.
+              We provide compliance guidance and audit-preparation support only.
+            </p>
+          </MotionReveal>
         </div>
       </section>
 
       {/* Final CTA */}
       <section className="bg-white text-black py-16 md:py-24 overflow-x-hidden border-t border-black">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-black mb-4">
-            Start Here
-          </p>
-          <h2 className="text-3xl md:text-4xl font-black mb-2 tracking-tight text-black">
-            Start with a free gap scan.
-          </h2>
-          <p className="font-bold text-lg mb-8 text-black">No cost. No commitment.</p>
-          <p className="text-black mb-10 max-w-xl mx-auto text-base leading-relaxed">
-            Identify your BLA 2026 compliance risk position in 90 minutes. Then decide if the
-            Sprint is right for your factory.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/gap-scan"
-              className="bg-black text-white font-bold px-8 py-4 rounded-full hover:opacity-80 transition-all text-sm"
-            >
-              Start Free Gap Scan →
-            </Link>
-            <Link
-              href="/book"
-              className="border border-black text-black px-8 py-4 rounded-full hover:bg-black hover:text-white transition-all text-sm font-medium"
-            >
-              Talk to VANTAGE →
-            </Link>
-          </div>
-          <div className="mt-5">
-            <a
-              href={WHATSAPP_DEFAULT}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-black underline hover:opacity-60 transition-opacity"
-            >
-              Or message us on WhatsApp
-            </a>
-          </div>
+          <MotionReveal variant="blurIn">
+            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-black mb-4">
+              Start Here
+            </p>
+            <h2 className="text-3xl md:text-4xl font-black mb-2 tracking-tight text-black">
+              Start with a free gap scan.
+            </h2>
+            <p className="font-bold text-lg mb-8 text-black">No cost. No commitment.</p>
+            <p className="text-black mb-10 max-w-xl mx-auto text-base leading-relaxed">
+              Identify your BLA 2026 compliance risk position in 90 minutes. Then decide if the
+              Sprint is right for your factory.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                href="/gap-scan"
+                className="bg-black text-white font-bold px-8 py-4 rounded-full hover:opacity-80 transition-all text-sm"
+              >
+                Start Free Gap Scan →
+              </Link>
+              <Link
+                href="/book"
+                className="border border-black text-black px-8 py-4 rounded-full hover:bg-black hover:text-white transition-all text-sm font-medium"
+              >
+                Talk to VANTAGE →
+              </Link>
+            </div>
+            <div className="mt-5">
+              <a
+                href={WHATSAPP_DEFAULT}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-black underline hover:opacity-60 transition-opacity"
+              >
+                Or message us on WhatsApp
+              </a>
+            </div>
+          </MotionReveal>
         </div>
       </section>
     </>
