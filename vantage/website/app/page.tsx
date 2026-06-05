@@ -9,9 +9,12 @@ import LegalDisclaimer from "@/components/layout/LegalDisclaimer";
 export default function HomePage() {
   return (
     <div className="flex flex-col min-h-screen">
-      <Header dark />
       <main className="flex-1">
-        <Hero />
+        {/* Header overlays the hero with absolute positioning */}
+        <div className="relative">
+          <Header overlay />
+          <Hero />
+        </div>
         <ProblemCards />
         <SprintOffer />
         <DashboardPreview />
