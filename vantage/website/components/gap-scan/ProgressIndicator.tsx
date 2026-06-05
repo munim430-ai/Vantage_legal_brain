@@ -24,7 +24,7 @@ export default function ProgressIndicator({ currentStep }: ProgressIndicatorProp
             <div key={label} className="flex items-center flex-1 last:flex-none">
               <div className="flex flex-col items-center">
                 <div
-                  className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0 transition-colors ${
+                  className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0 transition-all duration-300 ease-out ${
                     isComplete
                       ? "bg-black text-white"
                       : isCurrent

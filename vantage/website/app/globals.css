@@ -27,3 +27,203 @@
     text-wrap: balance;
   }
 }
+
+/* ─── Cinematic Animation System ─────────────────────────────────────── */
+
+/* Keyframes */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes blurIn {
+  from { opacity: 0; filter: blur(8px); transform: translateY(14px); }
+  to   { opacity: 1; filter: blur(0);   transform: translateY(0); }
+}
+
+@keyframes lineWipe {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleReveal {
+  from { opacity: 0; transform: scale(0.93); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes headerSlideDown {
+  from { opacity: 0; transform: translateY(-18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes megaWordRise {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes resultReveal {
+  from { opacity: 0; transform: translateY(36px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)   scale(1); }
+}
+
+@keyframes stepSlideIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes grainShift {
+  0%   { background-position: 0 0; }
+  25%  { background-position: 100px 60px; }
+  50%  { background-position: -60px 120px; }
+  75%  { background-position: 60px -80px; }
+  100% { background-position: 0 0; }
+}
+
+/* ── Scroll-triggered reveal utilities ──────────────────────────────── */
+/* Initial (hidden) state — toggled visible by MotionReveal component   */
+
+.motion-fade-up {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity  0.72s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.72s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.motion-fade-up.motion-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.motion-blur-in {
+  opacity: 0;
+  filter: blur(8px);
+  transform: translateY(14px);
+  transition:
+    opacity  0.85s cubic-bezier(0.16, 1, 0.3, 1),
+    filter   0.85s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, filter, transform;
+}
+.motion-blur-in.motion-visible {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+}
+
+.motion-line-wipe {
+  opacity: 0;
+  transform: translateX(-20px);
+  transition:
+    opacity  0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.motion-line-wipe.motion-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.motion-scale-in {
+  opacity: 0;
+  transform: scale(0.93);
+  transition:
+    opacity  0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.motion-scale-in.motion-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ── Above-fold hero animations (CSS-only, no JS needed) ──────────── */
+
+.hero-header-fade {
+  animation: headerSlideDown 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hero-badge {
+  animation: blurIn 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both;
+}
+
+.hero-headline {
+  animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.38s both;
+}
+
+.hero-copy {
+  animation: fadeUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.62s both;
+}
+
+.hero-cta {
+  animation: fadeUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.82s both;
+}
+
+.hero-disclaimer {
+  animation: fadeUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) 1.02s both;
+}
+
+.hero-mega-word {
+  animation: megaWordRise 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.36s both;
+}
+
+/* ── Cinematic grain overlay ─────────────────────────────────────────── */
+
+.cinematic-grain-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.055;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+@media (min-width: 768px) {
+  .cinematic-grain-overlay {
+    animation: grainShift 0.65s steps(1) infinite;
+  }
+}
+
+/* ── Gap scan step / result animations ──────────────────────────────── */
+
+.step-reveal {
+  animation: stepSlideIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.result-reveal {
+  animation: resultReveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ── Reduced-motion overrides ────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-fade-up,
+  .motion-blur-in,
+  .motion-line-wipe,
+  .motion-scale-in {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+
+  .hero-header-fade,
+  .hero-badge,
+  .hero-headline,
+  .hero-copy,
+  .hero-cta,
+  .hero-disclaimer,
+  .hero-mega-word,
+  .step-reveal,
+  .result-reveal {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+
+  .cinematic-grain-overlay {
+    display: none;
+  }
+}

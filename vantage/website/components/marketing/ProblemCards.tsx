@@ -1,3 +1,5 @@
+import MotionReveal from "@/components/ui/MotionReveal";
+
 const problems = [
   {
     title: "Appointment letters missing",
@@ -49,7 +51,7 @@ export default function ProblemCards() {
   return (
     <section className="bg-white py-16 md:py-24 overflow-x-hidden border-t border-black">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="max-w-2xl mb-12">
+        <MotionReveal variant="blurIn" className="max-w-2xl mb-12">
           <p className="text-xs font-semibold uppercase tracking-[0.12em] text-black mb-4">
             Risk Intelligence Grid
           </p>
@@ -60,27 +62,26 @@ export default function ProblemCards() {
             BLA 2006 enforcement has intensified. Buyers now require documented evidence against
             specific sections — verbal assurances are not accepted.
           </p>
-        </div>
+        </MotionReveal>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-          {problems.map((p) => (
-            <div
-              key={p.title}
-              className="border border-black rounded-xl p-5"
-            >
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-black">
-                  {p.severity}
-                </span>
-                <span className="text-[10px] font-mono text-black">
-                  {p.ref}
-                </span>
+          {problems.map((p, i) => (
+            <MotionReveal key={p.title} variant="scaleIn" delay={i * 80}>
+              <div className="border border-black rounded-xl p-5 h-full">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-black">
+                    {p.severity}
+                  </span>
+                  <span className="text-[10px] font-mono text-black">
+                    {p.ref}
+                  </span>
+                </div>
+                <h3 className="font-bold text-black mb-2 leading-snug text-sm">
+                  {p.title}
+                </h3>
+                <p className="text-sm text-black leading-relaxed">{p.detail}</p>
               </div>
-              <h3 className="font-bold text-black mb-2 leading-snug text-sm">
-                {p.title}
-              </h3>
-              <p className="text-sm text-black leading-relaxed">{p.detail}</p>
-            </div>
+            </MotionReveal>
           ))}
         </div>
       </div>

@@ -38,7 +38,7 @@ const NAV = [
 
 export default function Header({ variant = "dark" }: HeaderProps) {
   return (
-    <header className={`w-full h-[72px] flex items-center ${containerClass[variant]}`}>
+    <header className={`w-full h-[72px] flex items-center ${containerClass[variant]}${variant === "overlay" ? " hero-header-fade" : ""}`}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full flex items-center justify-between">
         {/* Text wordmark */}
         <Link href="/" className="flex items-center shrink-0">
