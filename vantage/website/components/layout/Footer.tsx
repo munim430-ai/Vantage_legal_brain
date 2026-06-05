@@ -1,50 +1,59 @@
 import Link from "next/link";
 import Image from "next/image";
 
+const NAV = [
+  { label: "Gap Scan", href: "/gap-scan" },
+  { label: "Sprint", href: "/pricing" },
+  { label: "Contact", href: "/book" },
+  { label: "Disclaimer", href: "/legal/disclaimer" },
+];
+
 export default function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="bg-white border-t border-vantage-black-10 mt-auto">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
+    <footer className="bg-vantage-black text-white">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-8">
+          {/* Brand */}
           <div className="flex flex-col gap-3">
             <Image
-              src="/brand/logo-wordmark-black-on-white.jpeg"
+              src="/brand/logo-wordmark-white-on-black.jpeg"
               alt="VANTAGE"
-              width={140}
-              height={36}
-              className="h-8 w-auto"
+              width={130}
+              height={34}
+              className="h-7 w-auto"
             />
-            <p className="text-sm text-vantage-dark-grey max-w-xs">
+            <p className="text-sm text-vantage-black-30 max-w-xs">
               Keystone Consultancy trading as VANTAGE
             </p>
           </div>
 
+          {/* Nav */}
           <nav className="flex flex-wrap gap-x-8 gap-y-2 text-sm">
-            <Link href="/gap-scan" className="text-vantage-dark-grey hover:text-vantage-black transition-colors">
-              Gap Scan
-            </Link>
-            <Link href="/pricing" className="text-vantage-dark-grey hover:text-vantage-black transition-colors">
-              Pricing
-            </Link>
-            <Link href="/book" className="text-vantage-dark-grey hover:text-vantage-black transition-colors">
-              Book a Call
-            </Link>
-            <Link href="/legal/disclaimer" className="text-vantage-dark-grey hover:text-vantage-black transition-colors">
-              Disclaimer
-            </Link>
+            {NAV.map(({ label, href }) => (
+              <Link
+                key={label}
+                href={href}
+                className="text-vantage-black-30 hover:text-white transition-colors"
+              >
+                {label}
+              </Link>
+            ))}
           </nav>
         </div>
 
-        <div className="mt-8 pt-6 border-t border-vantage-black-10">
-          <p className="text-xs text-vantage-dark-grey max-w-2xl">
+        <div className="mt-10 pt-6 border-t border-vantage-black-70">
+          <p className="text-xs text-vantage-black-50 max-w-2xl leading-relaxed">
             VANTAGE provides compliance guidance and audit-preparation support for Bangladesh RMG factories.
-            We are not a law firm. We do not provide legal advice. No audit outcome is guaranteed.{" "}
-            <Link href="/legal/disclaimer" className="underline hover:text-vantage-black">
-              Legal disclaimer &amp; service boundaries
+            Not a law firm. Not legal advice. No audit outcome guaranteed.{" "}
+            <Link
+              href="/legal/disclaimer"
+              className="underline hover:text-vantage-black-10 transition-colors"
+            >
+              Full service boundary statement
             </Link>
           </p>
-          <p className="text-xs text-vantage-medium-grey mt-3">
+          <p className="text-xs text-vantage-black-70 mt-3">
             &copy; {year} Keystone Consultancy. All rights reserved.
           </p>
         </div>

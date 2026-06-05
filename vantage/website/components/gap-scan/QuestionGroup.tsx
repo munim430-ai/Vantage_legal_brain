@@ -28,20 +28,22 @@ export function QuestionCard({ question, answer, onChange }: QuestionCardProps) 
   const [showNote, setShowNote] = useState(!!answer.evidenceNote);
 
   return (
-    <div className="bg-white border border-vantage-black-10 rounded p-5">
-      <div className="flex items-start gap-3 mb-3">
+    <div className="border border-vantage-black-10 rounded-xl p-5 bg-white">
+      <div className="flex items-start gap-3 mb-4">
         <span
-          className={`inline-block text-[10px] font-semibold px-2 py-0.5 rounded shrink-0 mt-0.5 ${RISK_BADGE[question.riskLevel]}`}
+          className={`inline-block text-[10px] font-bold px-2 py-0.5 rounded shrink-0 mt-0.5 ${RISK_BADGE[question.riskLevel]}`}
         >
           {question.riskLevel}
         </span>
-        <p className="text-sm font-medium text-vantage-black">
-          <span className="text-vantage-medium-grey mr-1">Q{question.id}</span>
+        <p className="text-sm font-medium text-vantage-black leading-snug">
+          <span className="text-vantage-medium-grey mr-1 font-mono text-xs">
+            Q{question.id}
+          </span>
           {question.text}
         </p>
       </div>
 
-      <div className="space-y-2 ml-1">
+      <div className="space-y-2.5 ml-1">
         {OPTIONS.map((opt) => (
           <label
             key={opt.value}
@@ -53,7 +55,7 @@ export function QuestionCard({ question, answer, onChange }: QuestionCardProps) 
               value={opt.value}
               checked={answer.answer === opt.value}
               onChange={() => onChange({ ...answer, answer: opt.value })}
-              className="w-4 h-4 accent-vantage-teal cursor-pointer"
+              className="w-4 h-4 accent-vantage-teal cursor-pointer shrink-0"
             />
             <span className="text-sm text-vantage-dark-grey group-hover:text-vantage-black transition-colors">
               {opt.label}
@@ -72,7 +74,7 @@ export function QuestionCard({ question, answer, onChange }: QuestionCardProps) 
         </button>
       ) : (
         <textarea
-          className="mt-3 w-full text-xs border border-vantage-black-10 rounded p-2 text-vantage-black placeholder-vantage-medium-grey focus:outline-none focus:border-vantage-teal resize-none"
+          className="mt-3 w-full text-xs border border-vantage-black-10 rounded-lg p-2.5 text-vantage-black placeholder-vantage-medium-grey focus:outline-none focus:border-vantage-gold resize-none"
           rows={2}
           maxLength={500}
           placeholder="Note what evidence was reviewed (optional)"
@@ -91,15 +93,20 @@ interface Q25CardProps {
   onChange: (docs: { doc1: string; doc2: string; doc3: string }) => void;
 }
 
+const inputCls =
+  "w-full text-sm border border-vantage-black-10 rounded px-3 py-2.5 focus:outline-none focus:border-vantage-gold transition-colors";
+
 export function Q25Card({ doc1, doc2, doc3, onChange }: Q25CardProps) {
   return (
-    <div className="bg-white border border-vantage-black-10 rounded p-5">
-      <div className="flex items-start gap-3 mb-3">
-        <span className={`inline-block text-[10px] font-semibold px-2 py-0.5 rounded shrink-0 mt-0.5 ${RISK_BADGE.Critical}`}>
+    <div className="border border-vantage-black-10 rounded-xl p-5 bg-white">
+      <div className="flex items-start gap-3 mb-4">
+        <span
+          className={`inline-block text-[10px] font-bold px-2 py-0.5 rounded shrink-0 mt-0.5 ${RISK_BADGE.Critical}`}
+        >
           Critical
         </span>
-        <p className="text-sm font-medium text-vantage-black">
-          <span className="text-vantage-medium-grey mr-1">Q25</span>
+        <p className="text-sm font-medium text-vantage-black leading-snug">
+          <span className="text-vantage-medium-grey mr-1 font-mono text-xs">Q25</span>
           What are the top three compliance documents the factory cannot produce within 24 hours?
         </p>
       </div>
@@ -111,7 +118,7 @@ export function Q25Card({ doc1, doc2, doc3, onChange }: Q25CardProps) {
           value={doc1}
           onChange={(e) => onChange({ doc1: e.target.value, doc2, doc3 })}
           maxLength={200}
-          className="w-full text-sm border border-vantage-black-10 rounded px-3 py-2 focus:outline-none focus:border-vantage-teal"
+          className={inputCls}
         />
         <input
           type="text"
@@ -119,7 +126,7 @@ export function Q25Card({ doc1, doc2, doc3, onChange }: Q25CardProps) {
           value={doc2}
           onChange={(e) => onChange({ doc1, doc2: e.target.value, doc3 })}
           maxLength={200}
-          className="w-full text-sm border border-vantage-black-10 rounded px-3 py-2 focus:outline-none focus:border-vantage-teal"
+          className={inputCls}
         />
         <input
           type="text"
@@ -127,9 +134,11 @@ export function Q25Card({ doc1, doc2, doc3, onChange }: Q25CardProps) {
           value={doc3}
           onChange={(e) => onChange({ doc1, doc2, doc3: e.target.value })}
           maxLength={200}
-          className="w-full text-sm border border-vantage-black-10 rounded px-3 py-2 focus:outline-none focus:border-vantage-teal"
+          className={inputCls}
         />
-        <p className="text-xs text-vantage-medium-grey">Leave blank if all key documents are immediately available.</p>
+        <p className="text-xs text-vantage-medium-grey">
+          Leave blank if all key documents are immediately available.
+        </p>
       </div>
     </div>
   );
