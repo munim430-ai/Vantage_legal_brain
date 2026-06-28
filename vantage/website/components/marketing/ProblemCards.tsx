@@ -2,50 +2,48 @@ import MotionReveal from "@/components/ui/MotionReveal";
 
 const problems = [
   {
-    title: "Appointment letters missing",
-    ref: "BLA s.5",
-    severity: "Critical" as const,
+    title: "Worker files do not match current records",
+    ref: "Document control",
+    severity: "Priority" as const,
     detail:
-      "Written appointment letter required for every worker. Absence is a zero-tolerance nonconformity in BSCI, SMETA, and SA8000.",
+      "Appointment, identity, service and personnel records need consistent names, dates, signatures and current versions before they are presented for review.",
   },
   {
-    title: "Wage records missing breakdown",
-    ref: "BLA s.123",
-    severity: "Critical" as const,
+    title: "Attendance, overtime and payroll do not reconcile",
+    ref: "Wage evidence",
+    severity: "Priority" as const,
     detail:
-      "Payroll records must show basic wage, overtime rate, and deductions separately. A single total fails audit evidence requirements.",
+      "Small inconsistencies across attendance, overtime approval, calculations and payment evidence can create avoidable questions during buyer or audit review.",
   },
   {
-    title: "No written anti-harassment policy",
-    ref: "BLA s.332",
-    severity: "Critical" as const,
+    title: "Policies exist but version control is weak",
+    ref: "Policy support",
+    severity: "Control" as const,
     detail:
-      "Zero-tolerance item in Sedex/SMETA 4-Pillar and Better Work. Verbal policies are not accepted as evidence.",
+      "VANTAGE checks approval dates, ownership, language versions, acknowledgement records and whether the policy is supported by implementation evidence.",
   },
   {
-    title: "Grievance register not maintained",
-    ref: "BLA s.205",
-    severity: "High" as const,
+    title: "Grievance records show intake but not closure",
+    ref: "Worker evidence",
+    severity: "Control" as const,
     detail:
-      "Factories without a grievance register and closure log fail Worker Voice requirements across RSC and H&M CoC.",
+      "A complete evidence trail should show intake, review, action, closure and confidentiality controls without exposing worker identities unnecessarily.",
   },
   {
-    title: "Open CAP items not closed",
-    ref: "Audit protocol",
-    severity: "High" as const,
+    title: "CAP actions lack owners and evidence",
+    ref: "CAP support",
+    severity: "Action" as const,
     detail:
-      "Open corrective action items from prior audits are escalated in the next buyer visit as repeat findings.",
+      "Open actions need named owners, due dates, completion evidence and management visibility so repeat issues can be addressed before the next review.",
   },
   {
-    title: "Audit window is short",
-    ref: "Time-critical",
-    severity: "Urgent" as const,
+    title: "Deadlines are stored across separate files",
+    ref: "Monitoring",
+    severity: "Action" as const,
     detail:
-      "Sprint delivery is 3 to 5 working days. With less than 4 weeks to audit, documentation gaps cannot be closed after the fact.",
+      "Licences, certificates, buyer requests, CAP dates and document renewals should be tracked through one controlled deadline register.",
   },
 ];
-
-type Severity = "Critical" | "High" | "Urgent";
 
 export default function ProblemCards() {
   return (
@@ -53,14 +51,13 @@ export default function ProblemCards() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <MotionReveal variant="blurIn" className="max-w-2xl mb-12">
           <p className="text-xs font-semibold uppercase tracking-[0.12em] text-black mb-4">
-            Risk Intelligence Grid
+            Readiness Risk Grid
           </p>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-black tracking-tight leading-tight">
-            The gaps that trigger nonconformity findings — and what VANTAGE fixes first.
+            The document gaps that create avoidable buyer pressure.
           </h2>
           <p className="text-black mt-4 text-base leading-relaxed">
-            BLA 2006 enforcement has intensified. Buyers now require documented evidence against
-            specific sections — verbal assurances are not accepted.
+            VANTAGE checks whether your evidence is current, consistent, owned and retrievable—not merely whether a document exists.
           </p>
         </MotionReveal>
 
@@ -72,13 +69,9 @@ export default function ProblemCards() {
                   <span className="text-[10px] font-bold uppercase tracking-widest text-black">
                     {p.severity}
                   </span>
-                  <span className="text-[10px] font-mono text-black">
-                    {p.ref}
-                  </span>
+                  <span className="text-[10px] font-mono text-black">{p.ref}</span>
                 </div>
-                <h3 className="font-bold text-black mb-2 leading-snug text-sm">
-                  {p.title}
-                </h3>
+                <h3 className="font-bold text-black mb-2 leading-snug text-sm">{p.title}</h3>
                 <p className="text-sm text-black leading-relaxed">{p.detail}</p>
               </div>
             </MotionReveal>

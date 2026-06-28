@@ -16,5 +16,6 @@ export function whatsappLink(message: string): string {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 }
 
-export const WHATSAPP_DEFAULT = whatsappLink("I want to learn about BLA compliance for my factory.");
-export const WHATSAPP_BOOK = whatsappLink("I want to discuss BLA compliance for my factory.");
+export const WHATSAPP_SCAN = whatsappLink("SCAN");
+export const WHATSAPP_DEFAULT = WHATSAPP_SCAN;
+export const WHATSAPP_BOOK = WHATSAPP_SCAN;

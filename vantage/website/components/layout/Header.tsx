@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { WHATSAPP_SCAN } from "@/lib/brand/tokens";
 
 export type HeaderVariant = "overlay" | "dark" | "light";
 
@@ -31,8 +32,9 @@ const ctaClass: Record<HeaderVariant, string> = {
 };
 
 const NAV = [
-  { label: "Gap Scan", href: "/gap-scan" },
-  { label: "Sprint", href: "/pricing" },
+  { label: "Free Scan", href: "/gap-scan" },
+  { label: "Services", href: "/pricing" },
+  { label: "Limited Offer", href: "/pricing#launch-offer" },
   { label: "Contact", href: "/book" },
 ];
 
@@ -40,14 +42,12 @@ export default function Header({ variant = "dark" }: HeaderProps) {
   return (
     <header className={`w-full h-[72px] flex items-center ${containerClass[variant]}${variant === "overlay" ? " hero-header-fade" : ""}`}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full flex items-center justify-between">
-        {/* Text wordmark */}
         <Link href="/" className="flex items-center shrink-0">
           <span className={`font-black tracking-[-0.08em] text-sm md:text-base transition-opacity ${wordmarkClass[variant]}`}>
             VANTAGE
           </span>
         </Link>
 
-        {/* Center nav — desktop */}
         <nav className="hidden md:flex items-center gap-8">
           {NAV.map(({ label, href }) => (
             <Link
@@ -60,22 +60,15 @@ export default function Header({ variant = "dark" }: HeaderProps) {
           ))}
         </nav>
 
-        {/* Right */}
         <div className="flex items-center gap-3">
-          {/* Mobile shortcut */}
-          <Link
-            href="/gap-scan"
-            className={`md:hidden text-sm font-medium transition-opacity ${navLinkClass[variant]}`}
+          <a
+            href={WHATSAPP_SCAN}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`inline-flex items-center text-sm font-semibold px-4 py-2 rounded-full border transition-all ${ctaClass[variant]}`}
           >
-            Scan ↗
-          </Link>
-          {/* Desktop CTA pill */}
-          <Link
-            href="/gap-scan"
-            className={`hidden md:inline-flex items-center text-sm font-semibold px-4 py-2 rounded-full border transition-all ${ctaClass[variant]}`}
-          >
-            Start scan ↗
-          </Link>
+            WhatsApp SCAN
+          </a>
         </div>
       </div>
     </header>
