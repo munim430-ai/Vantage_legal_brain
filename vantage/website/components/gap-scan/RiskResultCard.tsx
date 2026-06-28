@@ -12,20 +12,20 @@ interface RiskResultCardProps {
 
 const BAND_CONFIG = {
   "Low Risk": {
-    headline: "Your factory shows a low visible compliance risk.",
-    body: "The gaps identified are procedural. With targeted document improvement, your factory can reach a strong audit-preparation position. VANTAGE recommends a gap report review to confirm all records are complete and audit-preparation ready.",
+    headline: "Your records show a relatively controlled readiness position.",
+    body: "The visible issues appear limited, but document dates, consistency, ownership and retrieval should still be confirmed before the next external review.",
   },
   "Medium Risk": {
-    headline: "Your factory has compliance gaps that may be raised during audit preparation.",
-    body: "The gaps identified may lead to CAP findings in a formal audit review. A corrective action plan is needed before your next buyer review. VANTAGE can prepare a full gap report and corrective action plan through the BLA 2026 Compliance Sprint — delivered in 3 to 5 working days.",
+    headline: "Your factory has document-control gaps that need attention.",
+    body: "Prioritise missing evidence, inconsistent records and upcoming deadlines. VANTAGE can convert the findings into a controlled action plan.",
   },
   "High Risk": {
-    headline: "Your factory has significant compliance gaps across multiple areas.",
-    body: "These gaps create a risk of nonconformity findings and buyer compliance action. Without a corrective action plan, your next audit may produce CAP findings. VANTAGE recommends starting a BLA 2026 Compliance Sprint as soon as possible.",
+    headline: "Your factory has significant gaps across several evidence areas.",
+    body: "Assign owners and deadlines now, then confirm closure evidence. Concentrated remediation or ongoing monitoring may be appropriate.",
   },
   "Critical Risk": {
-    headline: "Your factory has critical compliance gaps.",
-    body: "These gaps represent an immediate risk to your buyer relationships and audit-preparation posture. VANTAGE strongly recommends starting a BLA 2026 Compliance Sprint within the next 5 working days to reduce your exposure before any audit or buyer visit.",
+    headline: "Your factory has urgent document and remediation gaps.",
+    body: "Management should review the highest-risk evidence, CAP actions and deadlines immediately. The score is an internal readiness indicator, not an audit result.",
   },
 } as const;
 
@@ -37,15 +37,15 @@ function buildResultMessage(
 ): string {
   const topGapLines = result.topGaps
     .slice(0, 5)
-    .map((g, i) => `${i + 1}. ${g.theme} (${g.riskLevel})`)
+    .map((gap, index) => `${index + 1}. ${gap.theme} (${gap.riskLevel})`)
     .join("\n");
+
   return (
-    `Gap Scan Result — ${factoryName}\n\n` +
+    `SCAN — ${factoryName}\n\n` +
     `Contact: ${contactName} | WA: ${contactWhatsApp}\n` +
-    `Score: ${result.complianceScore}/100 — ${result.riskBand}\n\n` +
-    `Top compliance gaps identified:\n${topGapLines}\n\n` +
-    `Recommended service: BLA 2026 Compliance Sprint\n\n` +
-    `Please contact me to discuss the next steps.`
+    `Readiness score: ${result.complianceScore}/100 — ${result.riskBand}\n\n` +
+    `Top gaps:\n${topGapLines}\n\n` +
+    `Please contact me to discuss the next step.`
   );
 }
 
@@ -55,21 +55,13 @@ export default function RiskResultCard({
   contactName,
   contactWhatsApp,
 }: RiskResultCardProps) {
-  const cfg = BAND_CONFIG[result.riskBand];
-  const showResultCTA = result.riskBand !== "Low Risk";
+  const config = BAND_CONFIG[result.riskBand];
 
   return (
     <div className="rounded-2xl overflow-hidden border border-black bg-white">
-      {/* Score header */}
       <div className="p-8 text-center border-b border-black">
-        {factoryName && (
-          <p className="text-sm mb-2 text-black">
-            Gap Scan Result — {factoryName}
-          </p>
-        )}
-        <p className="text-xs uppercase tracking-widest mb-2 text-black">
-          Your BLA 2026 Compliance Score
-        </p>
+        {factoryName && <p className="text-sm mb-2 text-black">Document Risk Scan — {factoryName}</p>}
+        <p className="text-xs uppercase tracking-widest mb-2 text-black">Document Readiness Score</p>
         <div className="text-7xl font-black text-black">{result.complianceScore}</div>
         <div className="text-2xl text-black">/&nbsp;100</div>
         <div className="mt-3 inline-block text-xs font-bold uppercase tracking-widest px-4 py-1.5 border border-black rounded-full">
@@ -77,93 +69,61 @@ export default function RiskResultCard({
         </div>
       </div>
 
-      {/* Gap summary */}
       <div className="px-8 py-4 border-b border-black">
-        <div className="flex gap-6 text-sm text-black">
-          <span>⬤ <strong>{result.criticalCount}</strong> Critical</span>
-          <span>⬤ <strong>{result.highCount}</strong> High</span>
-          <span>⬤ <strong>{result.mediumCount}</strong> Medium</span>
+        <div className="flex flex-wrap gap-6 text-sm text-black">
+          <span><strong>{result.criticalCount}</strong> Critical</span>
+          <span><strong>{result.highCount}</strong> High</span>
+          <span><strong>{result.mediumCount}</strong> Medium</span>
         </div>
       </div>
 
-      {/* Top gaps */}
       {result.topGaps.length > 0 && (
         <div className="px-8 py-4 border-b border-black">
-          <h3 className="text-xs font-semibold uppercase tracking-wide mb-3 text-black">
-            Top gaps identified
-          </h3>
+          <h3 className="text-xs font-semibold uppercase tracking-wide mb-3 text-black">Top gaps identified</h3>
           <ol className="space-y-2">
-            {result.topGaps.map((gap, i) => (
-              <li
-                key={gap.questionId}
-                className="flex items-center gap-3 text-sm text-black"
-              >
-                <span className="text-xs w-4 shrink-0 text-black">
-                  {i + 1}.
-                </span>
+            {result.topGaps.map((gap, index) => (
+              <li key={gap.questionId} className="flex items-center gap-3 text-sm text-black">
+                <span className="text-xs w-4 shrink-0">{index + 1}.</span>
                 <span>Q{gap.questionId} — {gap.theme}</span>
-                <span className="ml-auto text-xs font-bold uppercase tracking-wide shrink-0">
-                  {gap.riskLevel}
-                </span>
+                <span className="ml-auto text-xs font-bold uppercase tracking-wide shrink-0">{gap.riskLevel}</span>
               </li>
             ))}
           </ol>
         </div>
       )}
 
-      {/* Missing documents */}
       {result.missingDocuments.length > 0 && (
         <div className="px-8 py-4 border-b border-black">
-          <h3 className="text-xs font-semibold uppercase tracking-wide mb-3 text-black">
-            Missing documents (Q25)
-          </h3>
+          <h3 className="text-xs font-semibold uppercase tracking-wide mb-3 text-black">Missing documents reported</h3>
           <ol className="space-y-1">
-            {result.missingDocuments.map((doc, i) => (
-              <li key={i} className="text-sm text-black">
-                {i + 1}. {doc}
-              </li>
+            {result.missingDocuments.map((documentName, index) => (
+              <li key={documentName} className="text-sm text-black">{index + 1}. {documentName}</li>
             ))}
           </ol>
         </div>
       )}
 
-      {/* Headline + body */}
       <div className="px-8 py-5 border-b border-black">
-        <h2 className="text-lg font-bold mb-2 text-black">
-          {cfg.headline}
-        </h2>
-        <p className="text-sm leading-relaxed text-black">
-          {cfg.body}
-        </p>
+        <h2 className="text-lg font-bold mb-2 text-black">{config.headline}</h2>
+        <p className="text-sm leading-relaxed text-black">{config.body}</p>
       </div>
 
-      {/* WhatsApp result CTA */}
-      {showResultCTA && (
-        <div className="px-8 py-5 border-b border-black">
-          <p className="text-xs mb-3 text-black">
-            Send your scan result to VANTAGE so we can prepare your follow-up.
-          </p>
-          <a
-            href={whatsappLink(buildResultMessage(factoryName, contactName, contactWhatsApp, result))}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 font-semibold text-sm px-6 py-3 rounded-full border border-black text-black hover:bg-black hover:text-white transition-all"
-          >
-            Send this result to VANTAGE on WhatsApp →
-          </a>
-          <p className="text-xs mt-2 text-black">
-            This opens a pre-filled WhatsApp message with your score, gaps, and recommended service.
-            No data is sent automatically — you review and send.
-          </p>
-        </div>
-      )}
+      <div className="px-8 py-5 border-b border-black">
+        <a
+          href={whatsappLink(buildResultMessage(factoryName, contactName, contactWhatsApp, result))}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center font-semibold text-sm px-6 py-3 rounded-full border border-black text-black hover:bg-black hover:text-white transition-all"
+        >
+          WhatsApp SCAN
+        </a>
+        <p className="text-xs mt-2 text-black">A pre-filled message will open for your review. Nothing is sent automatically.</p>
+      </div>
 
-      {/* Sprint CTA */}
       <div className="px-8 py-6 border-b border-black">
         <SprintCTA riskBand={result.riskBand} complianceScore={result.complianceScore} />
       </div>
 
-      {/* Disclaimer */}
       <div className="px-8 pb-8 pt-5">
         <LegalDisclaimer variant="full" />
       </div>
